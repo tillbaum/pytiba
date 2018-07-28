@@ -1,0 +1,20 @@
+(dp0
+Vparanames
+p1
+VSheet Number,_,man_Index,_,Sheet Name,_,%Y-%m-%d,_,%H.%M
+p2
+sVprintfilepath
+p3
+VC:\u005cUsers\u005cTill\u005cDesktop
+p4
+sVoutput
+p5
+I01
+sVpdfexport
+p6
+I01
+sVprintername
+p7
+VPDFCreatorRevit
+p8
+s.
