@@ -13,8 +13,9 @@ The pdfOut_sheets tool exports:
  +   with papersize format automatically matching the sheetsize format
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
 
-Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured like this:
-![test]()
+Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured:
+
+![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png)
 
 (PDFCreator Version 3.2.1, there is a newer version available)
 
