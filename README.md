@@ -16,12 +16,12 @@ The pdfOut_sheets tool exports:
 Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured like this:
 ![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png)
 
-
-
 (PDFCreator Version 3.2.1, there is a newer version available)
 
-It also works with older version, see (https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png)
+It also works with older version, see http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/
 
 Sheet Selection Dialog 
 
-![SheetDialog1]() ![dialog2]()
+![SheetDialog1](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png) 
+
+![dialog2](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png)
