@@ -1,7 +1,7 @@
 # pytiba
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
-![pyTiBa](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pyTiBa%20Tab.png)
+![pyTiBa](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/pyTiBa%20Tab.png)
 
 ## Features
 ### pdf_export tool
@@ -14,11 +14,11 @@ The pdfOut_sheets tool exports:
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
 
 Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured like this:
-![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png)
+![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png =350x)
 
 (PDFCreator Version 3.2.1, there is a newer version available)
 
-It also works with older version, see (http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/)
+It also works with older version, see (https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png)
 
 Sheet Selection Dialog 
 
