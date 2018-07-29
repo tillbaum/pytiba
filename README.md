@@ -31,5 +31,9 @@ Sheet Selection Dialog
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="390" height="390">
 
+# License
+This package is licensed under GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007.
+
+
 
 
