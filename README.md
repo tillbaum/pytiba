@@ -17,13 +17,19 @@ Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org).
 
 ![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png)
 
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png" alt="alt text" width="840" height="550">
+
+
 (PDFCreator Version 3.2.1, there is a newer version available)
 
 It also works with older version, see http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/
 
 Sheet Selection Dialog 
-
+<!--
 ![SheetDialog1](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png) 
+-->
+
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="200" height="300">
 
 ![dialog2](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png){:height="300px" width="350px"}
 
