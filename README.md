@@ -14,7 +14,7 @@ The pdfOut_sheets tool exports:
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
 
 Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured like this:
-![test](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png)
+![test]()
 
 (PDFCreator Version 3.2.1, there is a newer version available)
 
@@ -24,4 +24,5 @@ Sheet Selection Dialog
 
 ![SheetDialog1](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png) 
 
-![dialog2](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png)
+![dialog2](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png){:height="300px" width="350px"}
+
