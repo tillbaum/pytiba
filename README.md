@@ -5,7 +5,7 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
 ## Features
 ### pdf_export tool
-The pdfOut_sheets tool exports: 
+The pdf_export tool exports: 
  +   multiple Revit Sheets to pdf at the same time,  
  +   with filenames specified by sheet  parameters for each sheet, i.e. 
     „SheetNumber_Revision_SheetName_date_time“  
