@@ -16,7 +16,6 @@ The pdfOut_sheets tool exports:
 Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured like this:
 ![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png){:height="500px" width="800px"}
 
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/PDFCreator%20ProfileSettings.png" width="800px">
 
 (PDFCreator Version 3.2.1, there is a newer version available)
 
