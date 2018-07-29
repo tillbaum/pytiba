@@ -27,3 +27,4 @@ Sheet Selection Dialog
 
 ![dialog2](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png){:height="300px" width="350px"}
 
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="200" height="300">
