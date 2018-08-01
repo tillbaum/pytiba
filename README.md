@@ -43,8 +43,13 @@ Adobe PDF printer:
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
-
-
+# Credits
+Credits go to the following: 
++ Ehsan Iran-Najad for providing this amazing, powerful IronPython Scrip Library / Environment for Revit. (Ehsan Iran-Nejad (https://github.com/eirannejad/pyRevit)
++ Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
++ Thomas Daren creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
++ Jeremy Tammik, creator and maintainer of RevitLookup)
++ Icon8 for nice Icons
 
 # License
 This package is licensed under GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007.
