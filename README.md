@@ -13,7 +13,7 @@ The pdf_export tool exports:
  +   with papersize format automatically matching the sheetsize format
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
 
-### Recommended pdfprinter
+#### Recommended pdfprinter
 The pdfprinter must be configured.
 Automatic Filenaming only works best with free PDFCreator printer (pdfforge.org). Filenaming and the correct Filpath output is supported. 
 Other printers that have been tested: Adobe PDF, bullzip PDF Printer. 
