@@ -15,8 +15,9 @@ The pdf_export tool exports:
 
 #### Recommended pdfprinter
 The pdfprinter must be configured.
-Automatic Filenaming works best with free PDFCreator printer (pdfforge.org). Filenaming and the correct Filpath output can be specified. 
-Other printers that have been tested: Adobe PDF, bullzip PDF Printer. (Filepath output directory has to be set in the printer options)
+**Automatic Filenaming** works best with free **PDFCreator printer** (pdfforge.org). **Filenaming** and the correct *filepath* output can be specified. 
+Other printers that have been tested to work: 
+Adobe PDF, bullzip PDF Printer. (Filepath output directory has to be set in the printer options)
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png" alt="alt text" width="720" height="480">
 
