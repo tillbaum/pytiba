@@ -28,6 +28,7 @@ The pdf_export tool exports:
 
 #### Recommended pdfprinter
 The pdfprinter must be configured.
+
 **Automatic Filenaming** works best with free **PDFCreator printer** (pdfforge.org). **Filenaming** and the correct **filepath** output can be specified. 
 Other printers that have been tested to work: 
 
