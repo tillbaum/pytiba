@@ -43,7 +43,24 @@ Adobe PDF printer:
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
+#### Papersize-format matching Sheetformat Size
+To get this to work you have to add PrintForms to your  
+
+
+<table>
+<tr>
+<td>
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagement%20Forms.png" alt="alt text" width="390" height="390">
+</td>
+<td>
+<img src="" alt="alt text" width="390" height="390">
+</td>
+</tr>
+</table>
+
 (work in progress)
+
+
 
 # Credits
 Credits and a thank you go to the following: 
