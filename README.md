@@ -40,13 +40,9 @@ Sheet Selection Dialog
 </td>
 <td>
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="390" height="390">
-This text is in the table data cell on the right.
 </td>
 </tr>
 </table>
-<!--
-![SheetDialog1](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png) 
--->
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png" alt="alt text" width="390" height="390">
 
