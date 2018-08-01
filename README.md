@@ -11,7 +11,20 @@ The pdf_export tool exports:
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
  +   with papersize format automatically matching the sheetsize format
- +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
+ +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog. 
+ 
+####Sheet Selection Dialog 
+
+<table>
+<tr>
+<td>
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png" alt="alt text" width="390" height="390">
+</td>
+<td>
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="390" height="390">
+</td>
+</tr>
+</table>
 
 #### Recommended pdfprinter
 The pdfprinter must be configured.
@@ -31,22 +44,8 @@ Adobe PDF printer:
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
-Sheet Selection Dialog 
 
-<table>
-<tr>
-<td>
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png" alt="alt text" width="390" height="390">
-</td>
-<td>
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="390" height="390">
-</td>
-</tr>
-</table>
 
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelectionDialog.png" alt="alt text" width="390" height="390">
-
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/SheetSelecDia_options.png" alt="alt text" width="390" height="390">
 
 # License
 This package is licensed under GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007.
