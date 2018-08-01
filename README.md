@@ -15,14 +15,17 @@ The pdf_export tool exports:
 
 #### Recommended pdfprinter
 The pdfprinter must be configured.
-Automatic Filenaming only works best with free PDFCreator printer (pdfforge.org). Filenaming and the correct Filpath output is supported. 
-Other printers that have been tested: Adobe PDF, bullzip PDF Printer. 
+Automatic Filenaming works best with free PDFCreator printer (pdfforge.org). Filenaming and the correct Filpath output can be specified. 
+Other printers that have been tested: Adobe PDF, bullzip PDF Printer. (Filepath output directory has to be set in the printer options)
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png" alt="alt text" width="720" height="480">
 
 
 (PDFCreator Version 3.2.1, there is a newer version available)
 It also works with older version, see http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/
+
+Adobe PDF
+<img src="" alt="alt text" width="720" height="480">
 
 Sheet Selection Dialog 
 <!--
