@@ -25,7 +25,7 @@ Other printers that have been tested: Adobe PDF, bullzip PDF Printer. (Filepath 
 It also works with older version, see http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/
 
 Adobe PDF
-<img src="" alt="alt text" width="720" height="480">
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDFPrint_filename_working.png" alt="alt text" width="720" height="480">
 
 Sheet Selection Dialog 
 <!--
