@@ -27,7 +27,7 @@ The pdf_export tool exports:
 </table>
 
 #### Recommended pdfprinter
-The pdfprinter must be configured.
+The pdfprinter must be configured. 
 
 **Automatic Filenaming** works best with free **PDFCreator printer** (pdfforge.org). **Filenaming** and the correct **filepath** output can be specified. 
 Other printers that have been tested to work: 
@@ -46,13 +46,26 @@ Adobe PDF printer:
 
 #### Papersize-format matching Sheetformat Size
 To get this function to work you have to add Print Forms with the papersizeformat you want to print to your 
-Windows Print Management.
-You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar.
-(Or when you start from the "Conrol Panel": ControlPanel>AdministrativeTools>PrintManagement)
+Print Management on Windows. 
+(From the Windows Conrol Panel its ControlPanel>AdministrativeTools>PrintManagement)
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png" alt="alt text" >
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/Add%20Print%20Forms.png" alt="alt text" >
+
+If you add forms they will be available globaly to most installed pdf printers.
+You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar.
+The new forms must be named "widthxheight" i.e. "90x65", "85x
+Those print forms are saved in the registry "\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Print\Forms". 
+This key can be exported and imported on other system, so you have to create print forms only once.
+
+Now in the pdf_export tool has a function which collects all the 
+
+Now most AEC firms print on large plotters with 
+
+
+
+
 
 
 In the Print Management dialog you can Add Forms by 
