@@ -13,13 +13,15 @@ The pdf_export tool exports:
  +   with papersize format automatically matching the sheetsize format
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-Dialog (Fig. 1). 
 
-Automatic Filenaming only works with the free PDFCreator printer (pdfforge.org). It must be configured:
+### Recommended pdfprinter
+The pdfprinter must be configured.
+Automatic Filenaming only works best with free PDFCreator printer (pdfforge.org). Filenaming and the correct Filpath output is supported. 
+Other printers that have been tested: Adobe PDF, bullzip PDF Printer. 
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png" alt="alt text" width="720" height="480">
 
 
 (PDFCreator Version 3.2.1, there is a newer version available)
-
 It also works with older version, see http://wrw.is/using-free-pdf-printer-rtv-xporter-pro-automatic-batch-pdf-naming-revit/
 
 Sheet Selection Dialog 
