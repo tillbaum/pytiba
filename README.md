@@ -46,11 +46,11 @@ Adobe PDF printer:
 (work in progress)
 
 # Credits
-Credits go to the following: 
-+ Ehsan Iran-Najad for providing this amazing, powerful IronPython Scrip Library / Environment for Revit. (Ehsan Iran-Nejad (https://github.com/eirannejad/pyRevit)
+Credits and a thank you go to the following: 
++ Ehsan Iran-Najad for providing PyRevit, the IronPython Script Library / Environment for Revit. [Ehsan Iran-Nejad](https://github.com/eirannejad/pyRevit)
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
-+ Thomas Daren creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
-+ Jeremy Tammik, creator and maintainer of RevitLookup)
++ Daren Thomas, creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
++ Jeremy Tammik, creator of [RevitLookup](https://github.com/jeremytammik/RevitLookup)
 + Icon8 for nice Icons
 
 # License
