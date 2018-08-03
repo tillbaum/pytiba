@@ -1,76 +1,75 @@
 """ transfer SheetSize Params from 
 	TitleBlock to SheetView
-	- add SharedPara BLATTHOEHE, BLATTBREITE to SheetView"""
+	if not exist, add SharedPara SheetHeigt, SheetWidth to SheetView"""
 
-__title__ = "transfer SheetSizeParas"
+__title__ = "transfer SheetSizeParas\ntoSheetView"
 
 __author__ = 'Tillmann Baumeister'
 
 # 10.05.2018; added comments, changed some german Names to english names 
 # added Parameter Creation. 
 
-
 from Autodesk.Revit.DB import * 
 from decimal import  Decimal
-
 
 doc = __revit__.ActiveUIDocument.Document
 uidoc = __revit__.ActiveUIDocument
 app = __revit__.Application
 
+# --- TitlBlock Collector, SheetView- Collector -------------------------------
+
 # GetBuiltIN parameter ID object from BuiltInParameterList (see Revit Docs, its a huge List)in DB namespace 
 shwi = BuiltInParameter.SHEET_WIDTH  
 shhei = BuiltInParameter.SHEET_HEIGHT
 
-# FE COLLECTOR -------------------------------------------------------------------
-# TitleBlock collector -------------------------------------------------------------------
-TBlcol = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_TitleBlocks) \
-					.WhereElementIsNotElementType() \
-					.ToElements() 
+# Filter out TitleBlocks which width <= 21cm (No Sheet HEaders)
+# FilterDoubleRule(ParameterValueProvider(), FilterNumericEquals),"ex.10.0", delta_x)
+filter_double_rule = FilterDoubleRule(ParameterValueProvider(ElementId(shwi)),
+                                       FilterNumericGreater(),
+                                       0.21 * 3.28084,
+                                       1E-2)
 
-# Filter out TitleBlocks that have SHEET_WIDTH <20 cm ,or < 18.5 cm, when 
-# there are more than 1 TB on the Sheet
-# todo: do this with the Tutorial Details on FEC 
-tblist = []
-vallist = []
-for i in TBlcol:
-	if i.get_Parameter(shwi).StorageType == StorageType.Double:
-		valuewi = i.get_Parameter(shwi).AsDouble() / 3.28  # Value saved in feet  1m = 3.28084 feet
-		vallist.append(valuewi)
-		if valuewi > 0.21: 
-			tblist.append(i)
+FECtitleblock = FilteredElementCollector(doc) \
+			.WhereElementIsNotElementType() \
+			.WherePasses(ElementParameterFilter(filter_double_rule)) \
+          	.ToElements()
 
+tblist = FECtitleblock
+# TEST PRINT 
+# print("FECtb2 --------------------------")
+# for i in FECtb2: 
+	# ovid = i.OwnerViewId
+	# name = doc.GetElement(ovid).Name
+	# print(name) 
+# print(len(FECtb2))
 
 
 # ViewSheet Collector instance 
 sheetcol = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Sheets) \
 					.WhereElementIsNotElementType() \
-					.ToElements()
+					.ToElements() 
 
-# Filter Out ViewSheets that are placeholders and save all in new list: shlist 
-shlist =[]
-for i in sheetcol: 
-	if not i.IsPlaceholder: 
-		shlist.append(i) 
+# Filter Out ViewSheets that are placeholders and save all in new list: shlist: DO THIS in FEC, 
+# could not find a post in Inet where this is done in the FEC. There must be a workaround.  
+shlist = [i for i in sheetcol if not i.IsPlaceholder ]
 # End FEC ------------------------------------------------------------------------
-
 
 # test if Parameters BLATTHOEHE and BLATTBREITE exist in SheetViews. If not create them. 
 
-sh0 = shlist[0]
-testp1= sh0.LookupParameter("BLATTHOEHE")
-testp2 = sh0.LookupParameter("BLATTBREITE")
-
 # Inputs 
-_paramName1 = "BLATTBREITE" # can be anything 
-_paramName2 = "BLATTHOEHE"
+_paramName1 = "SHEETHEIGHT" # can be anything 
+_paramName2 = "SHEETWIDTH"
 _groupName  = "Plan"  # ...can be anything , Groupname in ParameterFile 
 _paramtype  = ParameterType.Number  # is a namespace, subnamespace from DB Namespace 
-_builtincat = BuiltInCategory.OST_Sheets  # is a namespace, Enumeration class 
+_builtincat = BuiltInCategory.OST_Sheets  # is a namespace, Enumeration Type 
 _paramGroup = BuiltInParameterGroup.PG_IDENTITY_DATA # Namespace, subnamespace from DB,
 # ParameterGroup in the property panel in Revit 
 
-if not testp1 and not testp2:  
+sh0 = shlist[0]
+testp1= sh0.LookupParameter("SHEETHEIGHT")
+testp2 = sh0.LookupParameter("SHEETWIDTH")
+
+if not testp1 and not testp2:
 	
 # Create Parameter Blatthoehe and Blattbreite ----------------------------------
 
@@ -121,41 +120,43 @@ if not testp1 and not testp2:
 	bind_Map = doc.ParameterBindings.Insert(_exdef2, inst_bind, _paramGroup) 
 
 	t.Commit()
+	print "\nSharedParameters: SheetHeight, SheetWidth created!\n"
 # END Parameter Creation -----------------------------------------------------------
 
+# --- Transfer Parameters -------------------------------------
 
 # Start Transaction, outside the for loop 
 t = Transaction(doc, "transfer SheetSize Paras from TitleBlock to Sheetview")
 t.Start()
 
-
 try:
 	len(tblist) == len(shlist)
-	
+	for i in range(len(tblist)):  # example: tblist len = 5 -> 0,1,2,3,4 
+		TBelem =tblist[i]
+		# from Konrad func 
+		if TBelem.get_Parameter(shwi).StorageType == StorageType.Double:
+			valuewi = TBelem.get_Parameter(shwi).AsDouble() / 3.28084
+			valuehei = TBelem.get_Parameter(shhei).AsDouble() / 3.28084
+		else: print("not of type double") 
+
+		sh= shlist[i] 
+		sheight =  sh.LookupParameter("SHEETHEIGHT")
+		swidth = sh.LookupParameter("SHEETWIDTH")
+
+		if sheight and swidth: # if bhoehe und bbreite exist, 
+			sheight.Set(valuehei)
+			swidth.Set(valuewi) # Set() returns True if set with new value 
+			print "Sheet: {0:<15s} {1:<10s} {2:<5.2f} {3:<5.2f}".format(shlist[i].Name, "Height,Width:", valuehei, valuewi)
+
 except:
-	message = "len tblist is not len sheets list"
-	print(message)
-	 
- 
-for i in range(len(tblist)):  # example: tblist len = 5 -> 0,1,2,3,4 
-
-	TBelem =tblist[i]
-	# from Konrad func 
-	if TBelem.get_Parameter(shwi).StorageType == StorageType.Double:
-		valuewi = TBelem.get_Parameter(shwi).AsDouble() / 3.28
-		valuehei = TBelem.get_Parameter(shhei).AsDouble() / 3.28  # /3.28 ft/m not needed here. Revit does it by itself
-	else: print("not of type double") 
-
-	sh= shlist[i] 
-	
-	sheight =  sh.LookupParameter("BLATTHOEHE")
-	swidth = sh.LookupParameter("BLATTBREITE")
-
-	if sheight and swidth: # if bhoehe und bbreite exist, 
-		sheight.Set(("{:.3f}".format(valuehei)))
-		swidth.Set(valuewi) # Set() returns True if set with new value 
-
+	import traceback 
+	errorReport = traceback.format_exc() 
+	print(errorReport) 
+	try: t.RollBack() 
+	except: pass
 t.Commit()
+
+
 
 # "{:.3f}".format(valuehei)
 

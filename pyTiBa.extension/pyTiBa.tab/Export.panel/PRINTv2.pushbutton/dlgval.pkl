@@ -1,20 +1,20 @@
 (dp0
 Vparanames
 p1
-VSheet Number,_,man_Index,_,Sheet Name,_,%Y-%m-%d,_,%H.%M
+VSheet Number,-,Sheet Name
 p2
 sVprintfilepath
 p3
-VC:\u005cUsers\u005cTill\u005cDesktop
+V(gets overwritten by pdf-printer, default=C:\u005c)
 p4
 sVoutput
 p5
 I01
 sVpdfexport
 p6
-I01
+I00
 sVprintername
 p7
-VPDFCreatorRevit
+VPDFCreator
 p8
 s.

@@ -1,14 +1,18 @@
 """PDFsOut: - Active Sheet Selection in ProjectBrowser
 		   	  or, if nothing selected,
             - Selection in Sheet-Selection-Dialog
-			- Printer Adobe PDF, """
+			- v2.1 A0, A1, A2, A3 PrintForms included 
+			- v2.1 SheetSelectDialog: Printer must be selected from Revit Print Dialog now.
+			- v2.1 added set page_orientation.Portrait """
+
+from __future__ import division
 
 __title__ = "Pdf\nExport"
 
 __author__ = "TBaumeister" 	
 
-
 # TODO, CHECK Imports, what do I need??
+
 import sys
 import os
 import string #?
@@ -34,8 +38,6 @@ import pyrevit.forms
 DEFAULT_INPUTWINDOW_WIDTH = 500
 DEFAULT_INPUTWINDOW_HEIGHT = 400
 
-
-
 # for timing ------------------------------------------------
 from pyrevit.coreutils import Timer
 timer = Timer()
@@ -59,6 +61,7 @@ tblib_path = (r'E:\pyRevit\tblib')
 sys.path.append(tblib_path)
 pyrevitpath = r"E:\pyRevitv4.5\pyRevit\pyrevitlib"
 sys.path.append(pyrevitpath)
+
 import math	 # math.ceil
 import time # sleep() 
 import traceback 
@@ -130,6 +133,8 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         self.list_lb.SelectionMode = Controls.SelectionMode.Extended
         self._verify_context()
         self._list_options()
+	
+        printername = doc.PrintManager.PrinterName
 
 		#tb_ADDED: Values from Checkbox and Textinput --------------------------
         self.dic_dlgval = {}
@@ -143,7 +148,8 @@ class SelectFromCheckBoxes(framework.Windows.Window):
             #print self.dic # testing
             self.txtbox_paranames.Text = self.dic["paranames"]
             self.expander.Header += self.dic["paranames"]
-            self.txtbox_printername.Text = self.dic["printername"] 
+            self.txtbox_printername.Text = printername  #self.dic["printername"]
+			
             self.lb_printfilepath.Content = self.dic["printfilepath"]
             self.chbox_output.IsChecked = self.dic["output"]
             self.chbox_pdfexport.IsChecked = self.dic["pdfexport"]
@@ -385,7 +391,7 @@ def namefromparalist(view, paralist):
 	filename = ''.join(tmp_filenamelist)
 	return filename
 
-def pdfname(viewlist, paralist, dirpath):
+def pdfnamelist(viewlist, paralist, dirpath = ''):
 	filepathlist = []
 	filenamelist = []
 	for v in viewlist: 
@@ -394,6 +400,9 @@ def pdfname(viewlist, paralist, dirpath):
 		filenamelist.append(tmpname)
 		filepathlist.append(dirpath + "\\" + tmpname )
 	return (filepathlist, filenamelist)
+
+# namels = pdfnamelist(viewlist, paralist)
+# print(namels)
 
 
 def open_dic(fn="dlgval.pkl"):
@@ -415,6 +424,7 @@ def write_dic(newdic, olddic=open_dic(), fn= "dlgval.pkl"):
 def selectsheets2print():
 	all_sheets = DB.FilteredElementCollector(doc).OfClass(DB.ViewSheet) \
                    .WhereElementIsNotElementType().ToElements()
+	all_sheets = [i for i in all_sheets if not i.IsPlaceholder]
 	sortlist = sorted([SheetOption(x) for x in all_sheets], key=lambda x: x.number)
 	selsheet = SelectFromCheckBoxes(sortlist, title = "Select Sheets",
 						width = 500, height = 400, 
@@ -450,19 +460,6 @@ if not viewlist:
 
 # ---FILENAME -------------------------------------------------------
 
-def pdfnamelist(viewlist, paralist, dirpath = ''):
-	filepathlist = []
-	filenamelist = []
-	for v in viewlist: 
-		tmpname = namefromparalist(v, paralist)
-		tmpname += ".pdf" 
-		filenamelist.append(tmpname)
-		filepathlist.append(dirpath + "\\" + tmpname )
-	return (filepathlist, filenamelist)
-
-# namels = pdfnamelist(viewlist, paralist)
-# print(namels)
-
 # example: round_up(1.12222, 0.05) = 1.15 0.297 
 def round_up(x, a):
     return math.ceil(x / a) * a # TEST rundet down. ???
@@ -470,73 +467,96 @@ def round_up(x, a):
 
 # Creat PaperSize_Object-List: Matching TitleBlock_Sheet_Size with PaperSize in 
 	# Revit doc.PrintManager.PaperSizes, (a Set) -> WinPrintForms
-def matchPaperSize(viewlist, pdfPrinterName):
+def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
 	#create dictionary from PaperSizeSet - class
 	doc.PrintManager.SelectNewPrintDriver(pdfPrinterName) #line needed, 
 												# when a non-pdf printer is set up.
 	papersizeset = doc.PrintManager.PaperSizes
 	#dic_ps = {i.Name: i for i in papersizeset if i.Name[0].isdigit()}
 	dic_ps = {}
+	# put it in try statement because Foxitpdfprinter hat a form with Blank Name, None  -> Error
 	for i in papersizeset: 
 		try:
-			if i.Name[0].isdigit():
+			if i.Name[0].isdigit(): #or i.Name in ["119x84.5 A0", "59.5x42 A2", "84.5x59.5 A1" ]: 
 				dic_ps[i.Name]= i
 		except: pass
-
-	bip_shwi = BuiltInParameter.SHEET_WIDTH  
+	bip_shwi =  BuiltInParameter.SHEET_WIDTH  
 	bip_shhei = BuiltInParameter.SHEET_HEIGHT
-	psmess = []; papersizeobjls = []; ind_nops=[]
-	for i,v in enumerate(viewlist): 
-		# Get TitleBlock with Para Sheet_Width > 21cm 
-		# note: FilterDoubleRule(ParameterValueProvider(), FilterNumericEquals),
-		# "ex.10.0", delta_x)
-		filter_double_rule = \
-					FilterDoubleRule(ParameterValueProvider(ElementId(bip_shwi)), \
-					FilterNumericGreater(), 0.21 * 3.28084, 1E-2)
-		FECtb = FilteredElementCollector(doc, v.Id) \
-					.WherePasses(ElementParameterFilter(filter_double_rule)) \
-					.ToElements()
-										# feet to Meter conversion: 1 ft = 1/3.28 m
-		val_wi = FECtb[0].get_Parameter(bip_shwi).AsDouble() / 3.28084 
-		val_hei = FECtb[0].get_Parameter(bip_shhei).AsDouble() / 3.28084
-		wi = int(round_up(val_wi, 0.05) *100)  # from m to cm 
-		hei = int(round_up(val_hei, 0.05) *100)  
-		shsize_str = ''.join([str(wi), "x", str(hei)]) 
-		mess = []
-		mess.append(shsize_str)
-		# find a matching papersize if shsize_str not in dic_ps
-		cntr = 0 
-		while shsize_str not in dic_ps and cntr < 9: 
-			if cntr % 3 == 0: 	# 0%3 = 0  1%3 = 1, 2%3 = 2, 3%3=0, 4%3=1, 5%3=2 ... 
-				shsize_str = ''.join([str(wi), 'x' ,str(hei + 5)])
-				mess.append(shsize_str) 
-				cntr += 1 
-			elif cntr % 3 == 1: 
-				shsize_str = ''.join([str(wi + 5), "x", str(hei)])
+	psmess = []; papersizeobjls = []; 
+	try:
+		for i,v in enumerate(viewlist):
+			# Get TitleBlock with Para Sheet_Width > 20 cm 
+			# note: FilterDoubleRule(ParameterValueProvider(), FilterNumericEquals),
+			# "ex.10.0", delta_x)
+			filter_double_rule = \
+						FilterDoubleRule(ParameterValueProvider(ElementId(bip_shwi)), \
+						FilterNumericGreater(), 0.20 / 0.3048, 1E-2)
+			FECtb = FilteredElementCollector(doc, v.Id) \
+						.WherePasses(ElementParameterFilter(filter_double_rule)) \
+						.ToElements()
+			bip_wi = int(FECtb[0].get_Parameter(bip_shwi).AsDouble() * 0.3048 *1000) 	# from m to cm
+			bip_hei = int(FECtb[0].get_Parameter(bip_shhei).AsDouble() * 0.3048 *1000)
+			# print bip_wi, bip_hei , float(bip_wi), float(bip_hei), int(bip_wi), int(bip_hei) 
+			# cut of all irelevant  0.750000011 = 750 mm
+			wi_cm = bip_wi / 10 	#__future__ division ex: 297 / 10 = 29.7 
+			hei_cm = bip_hei / 10
+			shsize_str = ''.join([str(wi_cm), "x", str(hei_cm)])
+			shsize_str_round = ''.join([str(round_up(wi_cm, 0.5)), "x", str(round_up(hei_cm, 0.5))]) 
+			mess = []
+			mess.append(shsize_str)
+			# Check if original sheetformat or sheetformat roundedUp by 0.5cm is in papersize dic
+			if shsize_str in dic_ps or shsize_str_round in dic_ps: #any([i in dic_ps for i in [shsize_str, shsize_str_round]]):
+				for i in [shsize_str, shsize_str_round]: 
+					if i in dic_ps:
+						papersizeobjls.append(dic_ps[i])
+						mess.append('match-->')
+						mess.append(i)
+						psmess.append(mess)
+						break
+				continue 
+			# round to cm values 45.11 --> 50 , 73.0 --> 75 
+			wi= int(round_up(wi_cm, 5))
+			hei = int(round_up(hei_cm, 5))
+			shsize_str = ''.join([str(wi), "x", str(hei)])
+			mess.append(shsize_str)
+			cntr = 0
+			while shsize_str not in dic_ps and cntr < counterlimit:
+				if cntr % 3 == 0: 	# 0%3 = 0  1%3 = 1, 2%3 = 2, 3%3=0, 4%3=1, 5%3=2 ... 
+					shsize_str = ''.join([str(wi), 'x' ,str(hei + 5)])
+					mess.append(shsize_str) 
+					cntr += 1 
+				elif cntr % 3 == 1: 
+					shsize_str = ''.join([str(wi + 5), "x", str(hei)])
+					mess.append(shsize_str)
+					cntr += 1
+				else: # cntr % 3 == 2:
+					wi = wi + 5
+					hei = hei + 5
+					shsize_str = ''.join([str(wi), "x", str(hei)])															
+					mess.append(shsize_str)
+					cntr += 1
+			if shsize_str in dic_ps:
+				mess.append("match-->")
 				mess.append(shsize_str)
-				cntr += 1
-			else: # cntr % 3 == 2:
-				wi = wi + 5
-				hei = hei + 5
-				shsize_str = ''.join([str(wi), "x", str(hei)]) # str(wi) + "x" + str(hei) -->
-																#don't do this , use ''.join([ ])
-				mess.append(shsize_str)
-				cntr += 1
-
-		if shsize_str in dic_ps: 	
-			papersize_el = dic_ps[shsize_str]
-			papersizeobjls.append(papersize_el)
-		else: #when no papersize found, after while loop, use default = 90x90
-			papersize_el = dic_ps["90x90"]
-			papersizeobjls.append(papersize_el)
-			mess.append(" no match, ps= 90x90")
-		psmess.append(mess)
+				papersizeobjls.append(dic_ps[shsize_str])
+			else: #when no papersize found, after while loop, use default = 90x90
+				papersizeobjls.append(dic_ps["90x90"])
+				mess.append("no match, ps= 90x90")
+			psmess.append(mess)
+	except:
+		import traceback
+		errorReport = traceback.format_exc() 
+		print(errorReport) 
 	return (papersizeobjls, psmess)
 
+# Comment:
+# This was not an easy thing. int(FEC..................* 1000) ; TitleBlock with A0 Format  returns 1188[mm] != 1189, without int() it returns 1189.0 
+# When I set a Variable TitleBlock manually to 1189x841  int(FEC...) returns 1189 ,841. --> works. If you check the dimensions in the family
+# everything has the right size: width = 1189.000 
 
 # Get PrintSetting "!temp", if not exist, create it 
-# Could have also done it with FEC OfClass(PrintSetting)
-# doc.GetPrintSettingIds() Set of al PrintSettings, Method of doc. 
+	# Could have also done it with FEC OfClass(PrintSetting)
+	# doc.GetPrintSettingIds() Set of al PrintSettings, Method of doc. 
 def createTmpPrintSetting():
 	printsettingelems = [ doc.GetElement(i) for i in doc.GetPrintSettingIds() ] 
 							# returns a List[ElementId] with Ids
@@ -553,10 +573,10 @@ def createTmpPrintSetting():
 	return temp_printsetting[0]
 
 #---START of printFunction ----------------------------------------------------
-# only prints one sheet at a time, uses !temp-Viewset with one Sheet, 
+# prints one sheet at a time, uses !temp-Viewset with one Sheet, 
 # This is done to be able to provide a specific filename. 
 # printsetting !temp is permanently used for pdf printing.
-# this can be used to edit further print parameters, either in Revit PrintSetup-Dialog
+# this can be used to edit further print parameters, either in "!temp" Revit PrintSetup-Dialog
 # or in an in_future created edit-dialog. 
 
 def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
@@ -566,7 +586,7 @@ def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
 	new_viewset.Insert(singlesheet) 
 	printmanager = doc.PrintManager 
 	# set pdfprinterName = PDFCreator, Adobe PDF ..
-	printmanager.SelectNewPrintDriver(pdfprinterName) 
+	printmanager.SelectNewPrintDriver(pdfprinterName)
 	# determine print range to Select option 
 	printmanager.PrintRange = PrintRange.Select  # PrintRange is a own subclass 
 	# make the new_viewset current 
@@ -580,14 +600,17 @@ def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
 	printmanager.PrintToFileName = filepathname #as string, 
 	printmanager.Apply()
 
+	printmanager.CombinedFile = True
+	
 	_printsetup = printmanager.PrintSetup
-	_printsetup.CurrentPrintSetting = tmp_printsetupobj # "!temp"; Sometimes needs a
-													#TransactionProcess, Sometimes not.
-	t = Transaction(doc, "Testprint") #each Transaction must have a name. else: Error 
+	page_orient = DB.PageOrientationType.Portrait
+	t = Transaction(doc, "Testprint") #each Transaction must have a name. else: Error
 	t.Start()
+	_printsetup.CurrentPrintSetting = tmp_printsetupobj #needs a TransactionProcess, when changed
+	_printsetup.CurrentPrintSetting.PrintParameters.PageOrientation = page_orient
+	_printsetup.CurrentPrintSetting.PrintParameters.PaperSize = papersizeobj 
 	try:  #if there are no changes to the PrintSetup obj (ie change to PrintParameters)
 		  # .Save() method throws an exception, catch Exc. needed.
-		_printsetup.CurrentPrintSetting.PrintParameters.PaperSize = papersizeobj 
 		_printsetup.Save() #returns True or throws Exception: Save of print was unsuccessful
 	except: pass
 	try: 
@@ -609,13 +632,12 @@ def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
 		except: pass
 	return errorReport
 
-
 #Users\Till\Desktop\RevitPrint'
 
-dirpath = dlgdic["printfilepath"]  # can be anything, gets overwritten
+dirpath = dlgdic["printfilepath"]  # in most printers it gets overwritten
 			# by pdfPrinter, is set in Printer Properties, AdobePDF or PDFCreator work.
-str2list = dlgdic["paranames"].split(",")
 
+str2list = dlgdic["paranames"].split(",")
 fnlist= pdfnamelist(viewlist, str2list, dirpath)
 #returns tuple: (filepathnamelist, filenamelist) 
 
@@ -627,7 +649,6 @@ if output:
 	for i in dlgdic.items(): print i
 
 	print("\n ViewList ----------------------------------")
-
 	for i in viewlist: print i.SheetNumber + " - " + i.Name
 
 	print("\n FileNameList-------------------------------")
@@ -663,10 +684,10 @@ if output:
 #TODO: Dialog for sheet Selection, if Selection is empty, open Dialog, done 
 #TODO: Select views from Project Browser, done 
 #ToDO: If Papersize_obj could not be found, python fails to
-		#print any sheet at all, done 10.06.2018
-#TODO: If Select Sheets Dialog is Excaped of closed: stop script,
+		#print any sheet at all, implement exception, done 03.08.2018
+#TODO: If Select Sheets Dialog is Excaped or closed: stop script,
 		#close window(), done 12.06.2018 
-#ToDO: turn code into functions , 13.06.2018  
-#TODO: implement printing to A4,A3,A2,A1 Forms 
-#TODO: pickl dic_ps failed. not working, you can't pickl c# objects 
-#TODO: matchPaperSize fun: rewrite, that it 
+#ToDO: turn code into functions , done, 13.06.2018
+#TODO: implement printing to A4,A3,A2,A1 Forms , 03.08.2018 done
+#TODO: pickl dic_ps failed. not working, you can't pickl c# objects , done
+#TODO: matchPaperSize fun: rewrite,, done
