@@ -78,7 +78,7 @@ There is no need to use standard DIN formats. I.e.: with 914mm beeing the max. w
 If one uses a parametric variable Titleblock one can easily create plans in the 5cm raster. 
 
 #### FAQ / Errors 
-PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> Set Page Orientation Setting manually from Automatic to Landscape.
++ PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> Set Page Orientation Setting manually from  Automatic to Landscape. 
 In Revit !temp PrintSetting set Page Orientation to Portrai, its the default setting to assure matchPaperSizeFunc finds the right Print Form.
 
 **(work in progress)**
