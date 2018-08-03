@@ -44,12 +44,14 @@ Adobe PDF printer:
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
 #### Papersize-format matching Sheetformat Size
-To get this function to work properly you have to add Print Forms with the papersizeformat you want to print to your 
+To get this function to work properly you have to add Print Forms with the right papersizeformat, to your 
 Print Management on Windows. 
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png" alt="alt text" width="663" height="210">
+Windows Print Management Dialog
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/Add%20Print%20Forms.png" alt="alt text" width="328" height="374" >
+Print Form Dialog
 
 If you add forms they will be available globaly to most installed pdf printers.
 (You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar, 
