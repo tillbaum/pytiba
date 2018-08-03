@@ -78,18 +78,6 @@ If one uses a parametric variable Titleblock one can easily create plans in the 
 
 **(work in progress)**
 
-<table>
-<tr>
-<td>
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png" alt="alt text" >
-</td>
-<td>
-<img src="" alt="alt text" width="390" height="390">
-</td>
-</tr>
-</table>
-
-**(work in progress)**
 
 # Credits
 Credits and a thank you go to the following: 
