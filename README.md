@@ -59,7 +59,8 @@ If you add forms they will be available globaly to most installed pdf printers.
 (You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar, 
 from old Win7Style Conrol Panel its ControlPanel>AdministrativeTools>PrintManagement)
 
-The new forms must be named **"width[cm]xheight[cm]"**, ex: "90x65"[cm], A0 format: "118.9x84.1", A3 format "42.0x29.7". (only one position after the decimal point is allowed).
+The new forms must be named **"width[cm]xheight[cm]"**, "118.9x84.1" (A0 format), "42.0x29.7" (A3 format). only one position after the decimal point is allowed. Or "90x65", "125x85", without any decimal point, in a raster of 5.
+
 The print forms are saved in the registry "\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Print\Forms". 
 The key can be exported and imported on other system, so you have to create (many) print forms only once.
 
