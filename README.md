@@ -45,30 +45,32 @@ Adobe PDF printer:
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
 #### Papersize-format matching Sheetformat Size
-To get this function to work you have to add Print Forms with the papersizeformat you want to print to your 
+To get this function to work properly you have to add Print Forms with the papersizeformat you want to print to your 
 Print Management on Windows. 
-(From the Windows Conrol Panel its ControlPanel>AdministrativeTools>PrintManagement)
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png" alt="alt text" >
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/Add%20Print%20Forms.png" alt="alt text" >
 
 If you add forms they will be available globaly to most installed pdf printers.
-You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar.
-The new forms must be named "widthxheight" i.e. "90x65", "85x
-Those print forms are saved in the registry "\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Print\Forms". 
-This key can be exported and imported on other system, so you have to create print forms only once.
+(You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar, 
+from old Win7Style Conrol Panel its ControlPanel>AdministrativeTools>PrintManagement)
 
-Now in the pdf_export tool has a function which collects all the 
+The new forms must be named **"width[cm]xheight[cm]"**, ex: "90x65"[cm], A0 format: "118.9x84.1", A3 format "42.0x29.7". (only one position after the decimal point is allowed).
+The print forms are saved in the registry "\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Print\Forms". 
+The key can be exported and imported on other system, so you have to create (many) print forms only once.
 
-Now most AEC firms print on large plotters with 
+The pdf_export tool has a function matchPaperSize().
+It looks up the **BuiltInParameters Sheet Width an Sheedt Heigth** (which you can find in the Properties panel when a Title Block is selected) builds a string out of it ("110x65") and looks for a matching name in the Print Forms.
+If it can't find one, it rounds up by 0.5 (118.9 --> 119.0, 84.1 --> 85.0) and looks again.
+If it still can't find one it rounds up to the last cm digit by 5, (119 --> 120, 42 --> 45, no decimal point).
+After rounding up to a fraction of 5, it adds in +5 either to the width or the height, until the created string "widthxheight" matches a print form name. 
+CAD sheets get printed out on large format plotters with papersize rolls of width 914mm (36") or lager.
+There is no need to use standard DIN formats. I.e.: with 914mm beeing the max. width, subtracting 5mm on each side for paper transport in the plotter, a max. paper width of ca. 900mm is available for printing. (90x55, 120x90, 120x85)
+If one sticks to this idea and uses a Titleblock which is parametrically variable 
 
+**(work in progress)**
 
-
-
-
-
-In the Print Management dialog you can Add Forms by 
 <table>
 <tr>
 <td>
@@ -80,13 +82,11 @@ In the Print Management dialog you can Add Forms by
 </tr>
 </table>
 
-(work in progress)
-
-
+**(work in progress)**
 
 # Credits
 Credits and a thank you go to the following: 
-+ Ehsan Iran-Najad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the IronPython Script Library / Environment for Revit.
++ Ehsan Iran-Najad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the amazing IronPython Script Library / Environment for Revit.
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
 + Daren Thomas, creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
 + Jeremy Tammik, creator of [RevitLookup](https://github.com/jeremytammik/RevitLookup)
