@@ -76,6 +76,10 @@ CAD sheets get printed out on large format plotters with papersize rolls of widt
 There is no need to use standard DIN formats. I.e.: with 914mm beeing the max. width, subtracting 5mm on each side for paper transport in the plotter, a max. paper width of ca. 900mm is available for printing. (90x55, 120x90, 120x85)
 If one uses a parametric variable Titleblock one can easily create plans in the 5cm raster. 
 
+#### FAQ / Errors 
+PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> Set Page Orientation Setting manually from Automatic to Landscape.
+In Revit !temp PrintSetting set Page Orientation to Portrai, its the default setting to assure matchPaperSizeFunc finds the right Print Form.
+
 **(work in progress)**
 
 
