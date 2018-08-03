@@ -50,8 +50,10 @@ Print Management on Windows.
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png" alt="alt text" width="663" height="210">
 Windows Print Management Dialog
 
-<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/Add%20Print%20Forms.png" alt="alt text" width="328" height="374" >
+
+<img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/Add%20Print%20Forms.png" alt="alt text" width="328" height="374" > 
 Print Form Dialog
+
 
 If you add forms they will be available globaly to most installed pdf printers.
 (You can open this dialog by typing "Print Management" in your SearchBox in the WIN10 taskbar, 
