@@ -61,21 +61,7 @@ from old Win7Style Conrol Panel its ControlPanel>AdministrativeTools>PrintManage
 
 The new forms must be named **"width[cm]xheight[cm]"**, "118.9x84.1" (A0 format), "42.0x29.7" (A3 format). only one position after the decimal point is allowed. Or "90x65", "125x85", without any decimal point, in a raster of 5.
 
-The print forms are saved in the registry "\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Print\Forms". 
-The key can be exported and imported on other system, so you have to create (many) print forms only once.
-
-The pdf_export tool has a function matchPaperSize().
-It looks up the **BuiltInParameters Sheet Width an Sheedt Heigth** (which you can find in the Properties panel when a Title Block is selected) builds a **string** out of it **("110x65")** and looks for a **matching name** in the **Print Forms**.
-
-If it can't find one, it rounds up by 0.5 (118.9 --> 119.0, 84.1 --> 85.0) and looks again.
-If it still can't find one it rounds up to the last cm digit by a fraction of 5,
-(119 --> 120, 42 --> 45, no decimal point).
-
-After rounding up, it adds +5 either to the width or the height, until the created string "widthxheight" matches a print form name. 
-
-CAD sheets get printed out on large format plotters with papersize rolls of width 914mm (36") or lager.
-There is no need to use standard DIN formats. I.e.: with 914mm beeing the max. width, subtracting 5mm on each side for paper transport in the plotter, a max. paper width of ca. 900mm is available for printing. (90x55, 120x90, 120x85)
-If one uses a parametric variable Titleblock one can easily create plans in the 5cm raster. 
+** work in progress **
 
 #### FAQ / Errors 
 + PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> Set Page Orientation Setting manually from  Automatic to Landscape. 
