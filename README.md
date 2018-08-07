@@ -43,7 +43,7 @@ Adobe PDF printer:
 
 <img src="https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/AdobePDF%20printer_filename_working_Creation_dlg.png" alt="alt text" > <!--- width="720" height="480" -->
 
-#### Papersize-format matching Sheetformat Size
+#### Papersize-format matching Sheetsize-format
 To get this function to work properly you have to add Print Forms with the right papersizeformat, to your 
 Print Management on Windows. 
 
