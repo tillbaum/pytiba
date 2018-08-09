@@ -64,8 +64,8 @@ The new forms must be named **"width[cm]xheight[cm]"**, "118.9x84.1" (A0 format)
 **(work in progress)**
 
 #### FAQ / Errors 
-+ PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> Set Page Orientation manually from  Automatic to Landscape. 
-In Revit !temp PrintSetting set Page Orientation to Portrait, its the default setting to assure matchPaperSizeFunc finds the right Print Form.
++ PDFCreator switches Page Orientation/ Automatic page orientation doesn't seem to work. --> In PDFCreator Print Profile set Page Orientation manually from  Automatic to Landscape. 
+In Revit "!temp" PrintSetting set Page Orientation to Portrait, its the default setting to assure matchPaperSizeFunc finds the right Print Form. 
 
 **(work in progress)**
 
