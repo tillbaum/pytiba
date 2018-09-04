@@ -1,11 +1,12 @@
 """
 - creates LEvels from ExcelTable
 - creates FloorPlan and/or CeilingPlan 
-- uses last used LevelType 
+- uses last used LevelType
+TODO: Make Renaming from Excel possible
 """
 from __future__ import print_function, division
 
-__title__ = "Levels\nfrom Excel"
+__title__ = "Levels\nfr. Excel"
 
 __author__ = "Tillmann Baumeister"
 

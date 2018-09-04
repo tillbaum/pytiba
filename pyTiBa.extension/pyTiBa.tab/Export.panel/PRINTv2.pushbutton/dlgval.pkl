@@ -5,14 +5,14 @@ VSheet Number,-,Sheet Name
 p2
 sVprintfilepath
 p3
-V(gets overwritten by pdf-printer, default=C:\u005c)
+VC:\u005cUsers\u005cTill\u005cDesktop
 p4
 sVoutput
 p5
 I01
 sVpdfexport
 p6
-I00
+I01
 sVprintername
 p7
 VPDFCreator

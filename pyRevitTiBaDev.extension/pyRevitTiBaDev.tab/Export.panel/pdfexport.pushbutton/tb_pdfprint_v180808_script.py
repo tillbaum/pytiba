@@ -1,9 +1,10 @@
-"""PDFsOut: - Active Sheet Selection in ProjectBrowser
-		   	  or, if nothing selected,
-            - Selection in Sheet-Selection-Dialog
-			- v2.1 A0, A1, A2, A3 PrintForms included 
-			- v2.1 SheetSelectDialog: Printer must be selected from Revit Print Dialog now.
-			- v2.1 added set page_orientation.Portrait """
+"""PDFsOut:
+-   Sheet Selection in ProjectBrowser
+    or, if nothing selected,
+	in Sheet-Selection-Dialog
+-   v2.1 matchsize func updated to support A0 (1189x841), A1, A2, A3 formats, PrintForms included
+-   v2.1 SheetSelectDialog: pdfPrinter must be changed/selected from Revit Print Dialog now.
+-   v2.2 180808, added set page_orientation.Portrait to print func """
 
 from __future__ import division
 
@@ -504,7 +505,9 @@ def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
 			shsize_str_round = ''.join([str(round_up(wi_cm, 0.5)), "x", str(round_up(hei_cm, 0.5))]) 
 			mess = []
 			mess.append(shsize_str)
-			# Check if original sheetformat or sheetformat roundedUp by 0.5cm is in papersize dic
+			# Support for A0 1189x841[mm], A1, A2,A3 fromat 
+			# Check if original sheetformat (A0,A1..) or sheetformat ( 118.9--> 119cm) 
+			# roundedUp by 0.5cm is in papersize dic
 			if shsize_str in dic_ps or shsize_str_round in dic_ps: #any([i in dic_ps for i in [shsize_str, shsize_str_round]]):
 				for i in [shsize_str, shsize_str_round]: 
 					if i in dic_ps:
@@ -514,7 +517,7 @@ def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
 						psmess.append(mess)
 						break
 				continue 
-			# round to cm values 45.11 --> 50 , 73.0 --> 75 
+			# round to cm values 45.11 --> 50 , 73.0 --> 75,  FIX: this is better be done with decimal module 
 			wi= int(round_up(wi_cm, 5))
 			hei = int(round_up(hei_cm, 5))
 			shsize_str = ''.join([str(wi), "x", str(hei)])
@@ -550,11 +553,12 @@ def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
 	return (papersizeobjls, psmess)
 
 # Comment:
-# This was not an easy thing. int(FEC..................* 1000) ; TitleBlock with A0 Format  returns 1188[mm] != 1189, without int() it returns 1189.0 
+# This was not an easy thing. int(FEC..................* 1000) ;
+# TitleBlock with A0 Format  returns 1188[mm] != 1189, without int() it returns 1189.0 
 # When I set a Variable TitleBlock manually to 1189x841  int(FEC...) returns 1189 ,841. --> works. If you check the dimensions in the family
 # everything has the right size: width = 1189.000 
 
-# Get PrintSetting "!temp", if not exist, create it 
+# createTmpPrintSetting FUNC: Get RevitAPI-PrintSetting "!temp", if not exist, create it 
 	# Could have also done it with FEC OfClass(PrintSetting)
 	# doc.GetPrintSettingIds() Set of al PrintSettings, Method of doc. 
 def createTmpPrintSetting():
@@ -569,7 +573,7 @@ def createTmpPrintSetting():
 		t.Commit()			#Error the InSessionPrintSetting cannot be saved 
 		printsettingelems = [ doc.GetElement(i) for i in doc.GetPrintSettingIds() ]
 		temp_printsetting = [ i for i in printsettingelems if i.Name.Equals("!temp")]
-		print(" !temp PrintSetting created" )
+		print("\n!temp PrintSetting created" )
 	return temp_printsetting[0]
 
 #---START of printFunction ----------------------------------------------------
