@@ -71,7 +71,7 @@ In Revit "!temp" PrintSetting set Page Orientation to Portrait, its the default 
 
 
 # Credits
-Credits and a thank you go to the following: 
+Credits go to the following: 
 + Ehsan Iran-Najad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the amazing IronPython Script Library / Environment for Revit.
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
 + Daren Thomas, creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
