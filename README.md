@@ -3,7 +3,6 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
 ![pyTiBa](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/pyTiBa%20Tab.png)
 
-work in progress
 
 ## Features
 ### Hide/Unhide HelpConstruction objects:
