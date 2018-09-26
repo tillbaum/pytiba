@@ -9,7 +9,7 @@ work in progress
 ### Hide/Unhide HelpConstruction objects:
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
 This tool imitates a very useful function available in the Nemetschek Allplan Cad System. 
-All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" in their typename can be hiden and unhiden. Useful if you need to draw stuff which are  but should not appear on your printed sheets. 
+All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" in their typename can be hiden and unhiden. Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
 
 ### pdf_export tool 
 The pdf_export tool exports: 
@@ -19,28 +19,35 @@ The pdf_export tool exports:
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
  +   with papersize format automatically matching the sheetsize format
  +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-          Dialog. 
- +  Sheets can be selected via the Project Browser or the Sheet-Selection-Dialog. ()
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
 The filename can consist of any parameter found in the properties of the SheetView. Current date and/or time letters are also supported. 
 ### Sheets from Excel:
 Lets you easily create RevitSheetViews from an Excel worksheet table 
-Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale. 
+Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
+If Sheet exist, only the parameters get updated.
 ### Levels from Excel:
-Creates Levels from an Excel worksheet table
+Creates Levels from an Excel worksheet table.
 ### Section Tools
-This toolset lets you create Sections parralel to a line orthogonal to a line.
-When more than one lines are selected you can create a 
-
-
-
+This toolset lets you create Sections parallel to a line and orthogonal to a line.
+When more than one line is selected you can create a developed view of walls.
+Lets you automatically place the views in the right order on a sheet view (there is also a tool on the pyrevit tab for that purpose).
+### Schedule csv-Export
+Exports selected Schedules to csv-files with on click and also creates a Excel file.
+(Under developement)
+### Family Folder, Project Folder
+Just a link to your important Revit Content Folders. 
+Open a folder in Windows Explorer. 
+Pressing Shift + Click lets you choose the Folder in your File System. 
+### SaveAs
+Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
 
 
 
 ### PDF_export in Detail: 
 #### Sheet Selection Dialog 
-
+*** work in progress ***
 
 <table>
 <tr>
