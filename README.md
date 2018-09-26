@@ -42,7 +42,9 @@ Open a folder in Windows Explorer.
 Pressing Shift + Click lets you choose the Folder in your File System. 
 ### SaveAs
 Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
-
+### Update Fam/Prj
+Update all project files or family files in a folder to the current running revit version.
+(credits: www.sixtysecondrevit.com by J.Pierson)
 
 
 ### PDF_export in Detail: 
