@@ -1,12 +1,15 @@
 """
-- creates LEvels from ExcelTable
-- creates FloorPlan and/or CeilingPlan 
-- uses last used LevelType
-TODO: Make Renaming from Excel possible
+- create Levels from ExcelTable
+- create FloorPlan and/or CeilingPlan 
+
+Excel Layout. 
+Data Row to start A4  A3 = Headers
+Elevation/ Levelname/ Create Flooprlan/ CreateCeilingPlan
+- uses last used LevelType 
 """
 from __future__ import print_function, division
 
-__title__ = "Levels\nfr. Excel"
+__title__ = "Levels\nfrom Excel"
 
 __author__ = "Tillmann Baumeister"
 
@@ -49,55 +52,56 @@ def pick_file(file_ext='', files_filter='', init_dir='',
         return of_dlg.FileName
 
 def excel_read(origin = "A3", worksheetname="Levels"):
-    try:
-        xlapp = Marshal.GetActiveObject('Excel.Application')
-        ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
-    except EnvironmentError:
-        try: 
-            filepath = pick_file(file_ext='*')
-        except: sys.exit()
-        os.startfile(filepath)
-        from time import sleep
-        sleep(1)
-        try:
-            xlapp = Marshal.GetActiveObject('Excel.Application')
-            ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
-        except:
-            forms.alert('Excel Application not open!\nOpen Excel file with worksheet "Levels" ') 
-            dialogexcelnotopen.show() 
-            sys.exit() 
-    except: 
-        print("Error") 
-        import traceback 
-        print(traceback.format_exc()) 
+	try:
+		xlapp = Marshal.GetActiveObject('Excel.Application')
+		ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
+	except EnvironmentError:
+		try: 
+			filepath = pick_file(file_ext='*')
+		except: sys.exit()
+		os.startfile(filepath)
+		from time import sleep
+		sleep(1)
+		try:
+			xlapp = Marshal.GetActiveObject('Excel.Application')
+			ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
+		except:
+			forms.alert('Excel Application not open!\nOpen Excel file with worksheet "Levels" ')
+			dialogexcelnotopen.show()
+			sys.exit()
+	except:
+		print("Error")
+		import traceback
+		print(traceback.format_exc())
+	
+	extent =  ws.Cells(ws.UsedRange.Rows(ws.UsedRange.Rows.Count).Row, 
+				ws.UsedRange.Columns(ws.UsedRange.Columns.Count).Column)
+	xlrng = ws.Range[origin, extent].Value2 # 2dimensional array 
 
-    extent =  ws.Cells(ws.UsedRange.Rows(ws.UsedRange.Rows.Count).Row, 
-                    ws.UsedRange.Columns(ws.UsedRange.Columns.Count).Column) 
+	data_list = [[] for i in range(xlrng.GetUpperBound(0))]
 
-    xlrng = ws.Range[origin, extent].Value2 # 2dimensional array  
+	for i in range(xlrng.GetLowerBound(0)-1, xlrng.GetUpperBound(0), 1):
+		for j in range(xlrng.GetLowerBound(1)-1, xlrng.GetUpperBound(1), 1):
+			data_list[i].append(xlrng[i,j])
+	Marshal.ReleaseComObject(xlapp) 
+	return data_list
 
-    data_list = [[] for i in range(xlrng.GetUpperBound(0))] 
-    for i in range(xlrng.GetLowerBound(0)-1, xlrng.GetUpperBound(0), 1): 
-        for j in range(xlrng.GetLowerBound(1)-1, xlrng.GetUpperBound(1), 1): 
-            data_list[i].append(xlrng[i,j]) 
-    Marshal.ReleaseComObject(xlapp)  
-    return data_list 
 
 # filter ex_row function, filter out none rows!!! 
-def filter_excel_data(data_list): 
-    ex_rowfilter = [] 
-    for i in data_list: 
-        if i[0] and i[1] and not [k for k in DB.FilteredElementCollector(doc).OfClass(DB.Level) \
-                                                    if k.Name == i[0]]: 
+def filter_excel_data(data_list):
+    ex_rowfilter = []
+    for i in data_list:
+        if i[0] and i[1] and not [k for k in DB.FilteredElementCollector(doc) \
+                                        .OfClass(DB.Level) if k.Name == i[0]]:
             ex_rowfilter.append(i)
     return ex_rowfilter
 
 ex_row = filter_excel_data(data_list = excel_read())
 
 if __shiftclick__:
-    print("--- EXCEL-LEVEL-LIST -------------------------------------------")
+    print("--- EXCEL-LEVEL-LIST -----------------------------------------")
     for i in ex_row: print(i)
-    print("\n--- CREATED ----------      ----------------------------------")
+    print("\n--- CREATED ------------------------------------------------")
 
 
 import decimal
@@ -111,24 +115,24 @@ ceilingplantype = [k for k in FECviewfamtype if k.FamilyName == "Ceiling Plan"][
 t = DB.Transaction(doc, "Create Levels from Excel")
 t.Start()
 for i in ex_row:
-	try:
-		elev = Decimal(i[1]).quantize(Decimal('0.01'),
-									rounding="ROUND_HALF_UP") 
-		elev1 = elev / Decimal(0.3048)
-		lev = DB.Level.Create(doc, elev1)
-		lev.Name = str(i[0])
-		# Create FloorPlan, CeilingPlan
-		if i[2]: 
-			floorplan = DB.ViewPlan.Create(doc, floorplantype.Id, lev.Id)
-		if i[3]:
-			ceilingplan = DB.ViewPlan.Create(doc, ceilingplantype.Id, lev.Id)
-		if __shiftclick__:
-			print("Level ", lev.Name, "Floorplan ", floorplan.Name, "CeilingPlan ", ceilingplan.Name) 
-	except:
-		import traceback 
-		print(traceback.format_exc()) 
-		continue 
+    try:
+        elev = Decimal(i[1]).quantize(Decimal('0.01'),rounding="ROUND_HALF_UP")
+        elev1 = elev / Decimal(0.3048)
+        #Create LEVEL
+        lev = DB.Level.Create(doc, elev1)
+        lev.Name = str(i[0])
+        # Create FloorPlan, CeilingPlan
+        if i[2]:
+            floorplan = DB.ViewPlan.Create(doc, floorplantype.Id, lev.Id)
+        if i[3]:
+            ceilingplan = DB.ViewPlan.Create(doc, ceilingplantype.Id, lev.Id)
+        if __shiftclick__:
+            print("Level ", lev.Name, "Floorplan ", floorplan.Name, 
+                  "CeilingPlan ", ceilingplan.Name)
+    except:
+        import traceback
+        print(traceback.format_exc())
+        continue
+
 t.Commit()
-
-
 

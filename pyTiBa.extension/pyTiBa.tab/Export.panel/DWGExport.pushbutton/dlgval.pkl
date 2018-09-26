@@ -1,16 +1,19 @@
 (dp0
-Voutput
+Vparanames
 p1
-I01
-sVdwgexport
+VSheet Number,-,Sheet Name
 p2
+sVoutput
+p3
 I01
 sVfilepath
-p3
-VC:\u005cUsers\u005cTill\u005cDesktop\u005cRevitPrint
 p4
-sVparanames
+VSet DWG-Export-Folder
 p5
-VSheet Number,-,Sheet Name
+sVdxfexport
 p6
+I00
+sVdwgexport
+p7
+I01
 s.

@@ -1,57 +1,105 @@
-""" - Get Parameter Info from Excel
-	- Set Parameters in Revit
-	- if Parameters not exist:
-		create Parameter as SP in DB 
+"""	Not Implemented yet !!!!!!!
+	Get Parameter Info from Excel
+	Set Parameters in Revit
+	if Parameters not exist:
+	create Parameter as SP in DB 
 	"""
- 
+from __future__ import print_function, division
+
 __title__ = "PrjInfo"
 	
 __author__ = "TBaumeister" 	
 
-
-import clr # import common language runtime .Net Laufzeitumgebung fuer .Net-anwendungen. / um auf .Net Anwendungen
-
-from Autodesk.Revit.DB import *
-# from Autodesk.Revit.DB.Architecture import *
-# from Autodesk.Revit.DB.Analysis import * # 
-# from Autodesk.Revit.UI import *	
-
-from Autodesk.Revit.DB import FilteredElementCollector, BuiltInCategory, View # don't need to import that
-from System.Collections.Generic import List 
- 
-
-import sys
-pyt_path = (r'C:\Program Files (x86)\IronPython 2.7\Lib')
-sys.path.append(pyt_path)
+from Autodesk.Revit.DB import FilteredElementCollector, Transaction, BuiltInParameter
+from Autodesk.Revit import DB
+import System
+from System.Runtime.InteropServices import Marshal 
+import sys, os
+from rpw.ui.forms import TaskDialog 
+from pyrevit import forms 
+from pyrefit import Forms 
 
 doc = __revit__.ActiveUIDocument.Document
+uiapp = __revit__
+app = uiapp.Application
+
+#todo: CALC Open and REad -----------------------------------
+
+# EXCEL OPEN and READ ---------------------------------------------------------
+
+import clr 
+clr.AddReference("Microsoft.Office.Interop.Excel")
+import Microsoft.Office.Interop.Excel as Excel
 
 
-#######  FILTERED ELEMENT COLLECTOR  #####################################################
+def pick_file(file_ext='', files_filter='', init_dir='',
+              restore_dir=True, multi_file=False, unc_paths=False):
+    of_dlg = Forms.OpenFileDialog()
+    if files_filter:
+        of_dlg.Filter = files_filter
+    else:
+        of_dlg.Filter = '|*.{}'.format(file_ext)
+    of_dlg.RestoreDirectory = restore_dir
+    of_dlg.Multiselect = multi_file
+    if init_dir:
+        of_dlg.InitialDirectory = init_dir
+    if of_dlg.ShowDialog() == Forms.DialogResult.OK:
+        if unc_paths:
+            return coreutils.dletter_to_unc(of_dlg.FileName)
+        return of_dlg.FileName
 
-# --- create Instance of FEC, Collect all OST_Lines 
-alllines = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Lines)
-alllines.ToElements() 
-# Filter for Name: "HK" (Hilfskonstruktion)  : list comprehension
-hklines = [x for x in alllines if x.LineStyle.Name == "HK" ] 
+def excel_read(origin = "A3", worksheetname="Levels"):
+	try:
+		xlapp = Marshal.GetActiveObject('Excel.Application')
+		ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
+	except EnvironmentError:
+		try: 
+			filepath = pick_file(file_ext='*')
+		except: sys.exit()
+		os.startfile(filepath)
+		from time import sleep
+		sleep(1)
+		try:
+			xlapp = Marshal.GetActiveObject('Excel.Application')
+			ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
+		except:
+			forms.alert('Excel Application not open!\nOpen Excel file with worksheet "Levels" ')
+			dialogexcelnotopen.show()
+			sys.exit()
+	except:
+		print("Error")
+		import traceback
+		print(traceback.format_exc())
+	
+	extent =  ws.Cells(ws.UsedRange.Rows(ws.UsedRange.Rows.Count).Row, 
+					ws.UsedRange.Columns(ws.UsedRange.Columns.Count).Column)
 
-# --- FEC for Text -----------------------------------------
-txtcol = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_TextNotes).ToElements()
-hktxt = [x for x in txtcol if x.Name.Contains("HK")]
+	xlrng = ws.Range[origin, extent].Value2 # 2dimensional array 
 
-# FEC Dimension witch contains "HK" string  -----------------------------------
-dimcol = FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_Dimensions).ToElements()
-hkdim = [x for x in dimcol if x.Name.Contains("HK")]
+	data_list = [[] for i in range(xlrng.GetUpperBound(0))]
+	for i in range(xlrng.GetLowerBound(0)-1, xlrng.GetUpperBound(0), 1):
+		for j in range(xlrng.GetLowerBound(1)-1, xlrng.GetUpperBound(1), 1):
+			data_list[i].append(xlrng[i,j])
+	Marshal.ReleaseComObject(xlapp) 
+	return data_list
 
-#----- FilteredElementCollector of Views , Create Instance of FEC, ----------------------------
-viewcol = FilteredElementCollector(doc).OfClass(View).ToElements() 
 
-viewlist = []
-for view in viewcol:
-	if view.ViewType == ViewType.ThreeD:
-		if not(view.IsTemplate): # make sure that view is not a Template-view, 3D views can be TemplateViews???, didn't know that
-			viewlist.append(view)
-	else:
-		viewlist.append(view)
-# ---End View Collector -------------------------------------------
+# filter ex_row function, filter out none rows!!! 
+def filter_excel_data(data_list):
+	ex_rowfilter = []
+	for i in data_list:
+		if i[0] and i[1] and not [k for k in DB.FilteredElementCollector(doc).OfClass(DB.Level) if k.Name == i[0]]:
+			ex_rowfilter.append(i)
+	return ex_rowfilter
+
+paralist = []
+
+# for i in paralist
+	# for j in ex_rowfilter:
+		# try:
+			# bipProject = getnsetbip(doc, i, j)
+		
+		# except: 
+			# pass 
+  
 

@@ -110,27 +110,27 @@ def exc_writearray(origin = "A3", worksheetname= "Sheets"):
 	Marshal.ReleaseComObject(xlapp)
 	return True
 	
-# CREATE sheets and Titleblock2 from filterd excel_datalist
-def createsheets(sheetlist):
-	message = []
-	dic_sheetGuid = {}
-	t = Transaction(doc, "Create SheetViews from EXCEL")
-	try:
-		t.Start()
+# CREATE sheets and Titleblock2 from filtered excel_datalist
+def createsheets(sheetlist): 
+	message = [] 
+	dic_sheetGuid = {} 
+	t = Transaction(doc, "Create SheetViews from EXCEL") 
+	try: 
+		t.Start() 
 		for j in sheetlist: 
-			try:
-				tibl = dic_tibl[j[2]]
+			try: 
+				tibl = dic_tibl[j[2]] 
 			except: 
-				mess1 = 'Error: TitleBlock1 "{}" not found'.format(j[2])
-				message.append(mess1)
-				continue
-			a = DB.ViewSheet.Create(doc, tibl.Id)# ViewSheet Class, Create Method 
-			a.SheetNumber= j[0]
-			a.ViewName= j[1]
-			dic_sheetGuid[a.SheetNumber] = str(a.UniqueId)
+				mess1 = 'Error: TitleBlock1 "{}" not found'.format(j[2]) 
+				message.append(mess1) 
+				continue 
+			a = DB.ViewSheet.Create(doc, tibl.Id)# ViewSheet Class, Create Method  
+			a.SheetNumber= j[0] 
+			a.ViewName= j[1] 
+			dic_sheetGuid[a.SheetNumber] = str(a.UniqueId) 
 			#create TitleBlock2 instance 
-			try:
-				tibl_2 = dic_tibl[j[3]]
+			try: 
+				tibl_2 = dic_tibl[j[3]] 
 				newtitleblock = doc.Create.NewFamilyInstance(XYZ(0,0,0),tibl_2,a) 
 				mess2 = '; TitleBlock2: {}'.format(str(j[3])) 
 			except:	
@@ -189,13 +189,14 @@ if sheetstocreate: # exist/ is not empty/ != 0
 	createsh = createsheets(sheetstocreate[0])
 
 
-# OUTPUT -----------------------------------------
+# OUTPUT -----------------------------------------------
 if __shiftclick__:
 	print("READ EXCEL DATA------------------------------------------")
 	for i in ex_row: print(i) 
 
 	print("\nTITLEBLOCKS IN PRJ ------------------------------------")
-	for i in dic_tibl: print(i)
+	if sheetstocreate[1]:
+		for i in dic_tibl: print(i)
 
 	print("\nSHEET-TO-CREATE LIST: ---------------------------------")
 	for i in sheetstocreate[1]: print(i)
@@ -207,7 +208,7 @@ if __shiftclick__:
 		for i in createsh[0]: print(i)
 
 
-# READ and SET SHEET_PARAMETER -----------------------------------------------------
+# READ and SET SHEET_PARAMETER ---------------------------
 
 # Create Shared Parameter func: 
 def createSharedPara(_paramName_string,_groupNameinSPfile_string, \
@@ -256,7 +257,7 @@ FECsheetls = FilteredElementCollector(doc).OfCategory(DB.BuiltInCategory.OST_She
 					.WhereElementIsNotElementType() \
 					.ToElements()
 #Filter out Placeholders 
-FECsheet = [x for x in FECsheetls if not x.IsPlaceholder]
+FECsheet = [x for x in FECsheetls if not x.CanBePrinted]
 
 #CREATE man_Massstab Parameter 
 if not FECsheet[0].LookupParameter("man_Massstab"): # FIX!!! There is no Sheet in Project
@@ -282,7 +283,7 @@ if not FECsheet[0].LookupParameter("PBrowser"):
 
 def getnsetBIP(elem, bip, setvalue):
 	if setvalue:
-		try: para = elem.get_Parameter(bip)
+		try: para = elem.get_Parameter(bip) #BuiltInParameter.SHEET_WIDTH
 		except: pass
 		para.Set(setvalue)
 		return para.AsString()
@@ -307,6 +308,7 @@ def getnsetSharedPara(elem, SharedParaname_string, setvalue_string):
 		para.Set(setvalue_string)
 		return para.AsString()
 
+
 def parameterupdate(exel_datalist):
 	#Create a list from FECsheets matching ex_row_paralist in Project 
 	# using SheetNR for Equality Check, do this with FEC?
@@ -326,13 +328,13 @@ def parameterupdate(exel_datalist):
 	t.Start()
 	for i,j in zip(sheetviews, excel_data): 
 		try: 
-			date = getnsetBIP(i,sheet_issuedate, j[5])
-			drawnby = getnsetBIP(i,sheet_drawnby, j[6])
+			date = getnsetBIP(i, sheet_issuedate, j[5])
+			drawnby = getnsetBIP(i, sheet_drawnby, j[6])
 			man_massstab = getnsetSharedPara(i, "man_Massstab", j[7])
 			pbrowser = getnsetSharedPara(i, "PBrowser", j[4])
-			mess2 = ' {}-{} --> PBrowser: {}, issue_date: {}, drawnby: {}, M: {}'.format(i.SheetNumber, i.Name, pbrowser, date, drawnby, man_massstab) 
+			mess2 = '{}-{} --> PBrowser: {}, issue_date: {}, drawnby: {}, M: {}'.format(i.SheetNumber, i.Name, pbrowser, date, drawnby, man_massstab)
 			mess.append(mess2)
-		except:
+		except: 
 			error = 'Error '
 			mess.append(error)
 			import traceback
@@ -348,10 +350,11 @@ if __shiftclick__:
 	print("\nUPDATE SHEETVIEW PARAMETERS ---------------------------------------------")
 	for i in mess: print(i)
 
+
 # collect parameters  back from Sheets() 
-# for i in FECsheets:
-# sheetname = get_para # and write them to ex_row list
-# create a array the size of ex_row list
+# for i in FECsheets: 
+# sheetname = get_para # and write them to ex_row list 
+# create a array the size of ex_row list 
 # write er_row 
 
 #todo: Maybe Create TitleBlock2 separate from ViewSHeet Creation. To be able to change TB2 afterwards 
@@ -359,4 +362,4 @@ if __shiftclick__:
 # show print-box only when errors occurred. otherwise show nothing, for fast sheet creation. 
 # todo: when SHIFT+Click run script: show all print messages. 
 
-# todo: do it with a set. subtract sets, maybe its faster! try it!
+# todo: do it with a set. subtract sets, maybe its faster! try it! 

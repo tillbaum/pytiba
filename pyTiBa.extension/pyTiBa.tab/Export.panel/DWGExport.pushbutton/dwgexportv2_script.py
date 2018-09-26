@@ -1,16 +1,27 @@
-"""PDFsOut: - Active Sheet Selection in ProjectBrowser
-		   	  or, if nothing selected,
-            - Selection in Sheet-Selection-Dialog
-			- Printer Adobe PDF, """
+"""PDFsOut: Sheet Selection in ProjectBrowser
+added dxf checkbox in xaml file, 
+TODO: Add dxfexport function
+"""
 
-# TODO, CHECK Imports, what do I need??
+__doc__ = """
+PDFsOut: - Sheet Selection in ProjectBrowser
+or, if nothing selected,
+Selection in Sheet-Selection-Dialog
+"""
+__title__ = "DWG/\nDXF\nExport"
+
+__author__ = "TBaumeister"
+
+# TODO, CHECK Imports, what do I need?? CLEAN UP!!
 import clr
-import sys
-import os
-import string #?
-#from collections import OrderedDict 
-#import threading
-from functools import wraps 
+clr.AddReference('IronPython.Wpf')
+import wpf
+from System.Collections.Generic import List 
+#from System.Windows import Forms #
+
+from Autodesk.Revit.DB import *
+# (FilteredElementCollector, BuiltInCategory, Transaction)
+from Autodesk.Revit import DB 
 
 from pyrevit import HOST_APP, EXEC_PARAMS
 from pyrevit.compat import safe_strtype  # Func
@@ -19,39 +30,19 @@ from pyrevit.compat import safe_strtype  # Func
 from pyrevit import framework
 from pyrevit.framework import System
 #from pyrevit.framework import Threading 
-from pyrevit.framework import Interop #What is this?? 
-from pyrevit.framework import Controls, Media  # needed?
-
-clr.AddReference('IronPython.Wpf')
-import wpf
-
+from pyrevit.framework import Interop #What is this excel interop ?? 
+from pyrevit.framework import wpf, Controls, Media  # needed?
 from pyrevit.api import AdWindows 
-from pyrevit import revit, UI, DB 
+from pyrevit import revit, UI, DB, forms
 import pyrevit.forms 
-
-#logger = get_logger(__name__) 
-
-DEFAULT_INPUTWINDOW_WIDTH = 500
-DEFAULT_INPUTWINDOW_HEIGHT = 400
-
-__title__ = "DWG\nExport"
-
-__author__ = "TBaumeister"
-
-# for timing ------------------------------------------------
-from pyrevit.coreutils import Timer
-timer = Timer()
-
-import clr # import common language runtime .Net Laufzeitumgebung 
-from System.Collections.Generic import List 
-from System.Windows import Forms #
-from Autodesk.Revit.DB import *
-#( FilteredElementCollector, BuiltInCategory, Transaction, TransactionGroup, OfClass)
 import pyrevit 
-from pyrevit import forms 
 import rpw.ui.forms as rpwforms # FlexForm, Label, ComboBox, TextBox, \
-								# Separator, Button, CheckBox, Alert 
+                                 # Separator, Button, CheckBox, Alert 
+#logger = get_logger(__name__) 
+import string #?
+from functools import wraps 
 
+import sys, os 
 pyt_path = (r'C:\Program Files (x86)\IronPython 2.7\Lib') 
 sys.path.append(pyt_path)
 # tb_path 
@@ -65,27 +56,24 @@ from math import ceil
 import time # sleep() 
 import traceback
 import cPickle as pickle
-from pyrevit import script
+import json 
+from pyrevit import script 
+
+DEFAULT_INPUTWINDOW_WIDTH = 500 
+DEFAULT_INPUTWINDOW_HEIGHT = 400 
+
+# for timing ------------------------------------------------
+from pyrevit.coreutils import Timer
+timer = Timer()
 
 doc = __revit__.ActiveUIDocument.Document
 uidoc = __revit__.ActiveUIDocument
 
 #when running in RPS
 try:
-	__file__
+	__file__ #has value when run in pyrevit/RPS /PyhtonSHell Environment
 except NameError: 
 	__file__ = "E:\\pyRevit\\tblib\\"
-
-#*** Assign ListContent to multiple variables 
-# Revit usage: Sheetlist of size 5: v0 = sheetlist[0], v1 = ....
-def list2var(list, string = "a"):
-    for i,j in enumerate(list):
-        globals()['{}{}'.format(string, i)] = j
-    print "len(list)= ",len(list)
-
-# func to print items in list, 
-def lprint(ls):
-	for i in ls: print(i) 
 
 def pick_folder():
     fb_dlg = Forms.FolderBrowserDialog()
@@ -98,10 +86,10 @@ class SelectFromCheckBoxes(framework.Windows.Window):
     xaml_source = 'tb_SelectFromCheckboxesDwg.xaml' 
 
 # copied from TemplateUserInputWindow ---------------------------
-    def __init__(self, context,
-                 title='User Input',
-                 width=DEFAULT_INPUTWINDOW_WIDTH,
-                 height=DEFAULT_INPUTWINDOW_HEIGHT, **kwargs):
+    def __init__(self, context, 
+                 title='User Input', 
+                 width=DEFAULT_INPUTWINDOW_WIDTH, 
+                 height=DEFAULT_INPUTWINDOW_HEIGHT, **kwargs): 
         """Initialize user input window."""
         wpf.LoadComponent(self, os.path.join(os.path.dirname(__file__), self.xaml_source))
         self.Title = title
@@ -117,7 +105,8 @@ class SelectFromCheckBoxes(framework.Windows.Window):
             """Handle Escape keyboard input"""
             if args.Key == framework.Windows.Input.Key.Escape:
                 self.Close()
-                sys.exit() #TODO! sysExit. READ
+                sys.exit()
+
         self.PreviewKeyDown += handle_ESCinput_key # ESC closes the form
 
 		# in def setup( **kwargs)
@@ -133,37 +122,41 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         self._verify_context()
         self._list_options()
 
-		#tb_ADDED: Values from Checkbox and Textinput --------------------------
+        #tb_ADDED: Values from Checkbox and Textinput --------------------------
         self.dic_dlgval = {}
         with open(os.path.dirname(__file__) + "\\dlgval.pkl", "a+b") as f: # create and read
             f.seek(0)
             try:
                 self.dic = pickle.load(f)
-            except: print "run again"
-        try: 
+            except: print('\n --> Error: Set default values in Dialog and click "Select/Print", run again.')
+        try:
             self.dic # if dic not exists -> Except clause 
             #print self.dic # testing
             self.txtbox_paranames.Text = self.dic["paranames"]
 
-            firstdwgsetting = FilteredElementCollector(doc).OfClass(ExportDWGSettings) \
-													.FirstElement()
+            firstdwgsetting = DB.FilteredElementCollector(doc).OfClass(ExportDWGSettings) \
+                                                    .FirstElement()
             currentactiveset= firstdwgsetting.GetActivePredefinedSettings(doc)
             self.txtbox_dwgsetting.Text = currentactiveset.Name
             self.txtblock_expander.Text =   "Filename:       " + self.dic["paranames"] \
-										+ "\nExportSetup:  " + self.txtbox_dwgsetting.Text \
-										#+ "\nExportPath:" + self.dic["filepath"]s
-            self.lb_filepath.Content = self.dic["filepath"]
-            self.chbox_output.IsChecked = self.dic["output"]
-            self.chbox_dwgexport.IsChecked = self.dic["dwgexport"]
+                                         + "\nExportSetup:  " + self.txtbox_dwgsetting.Text \
+                                        #+ "\nExportPath:" + self.dic["filepath"]s
+            self.lb_filepath.Content = self.dic["filepath"]        
+            self.chbox_output.IsChecked = self.dic["output"]       
+            self.chbox_dwgexport.IsChecked = self.dic["dwgexport"] 
+            self.chbox_dxfexport.IsChecked = self.dic["dxfexport"] 
         except:
-            import traceback
-            errorReport = traceback.format_exc()
-            print(errorReport) 
-			#Standard Dialog Values
-            self.txtbox_paranames.Text = "Sheet Number,-,Sheet Name"
-            self.txtblock_expander.Text = "Sheet Number,_,Sheet Name"
+            # import traceback
+            # errorReport = traceback.format_exc()
+            # print(errorReport) 
+            #Standard Dialog Values
+            self.txtbox_paranames.Text = "Sheet Number,-,Sheet Name" 
+            self.txtblock_expander.Text = "Sheet Number,_,Sheet Name" 
             self.chbox_output.IsChecked = True
-            
+            self.chbox_dwgexport.IsChecked = True
+            self.chbox_dxfexport.IsChecked = False
+
+
 # copied from WMFWindow
     @staticmethod # e.g can be applied to the class and the instance, both
     def hide_element(*wpf_elements):
@@ -260,6 +253,7 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         """Mark selected checkboxes as unchecked."""
         self._set_states(state=False, selected=True)
 
+
     def button_select(self, sender, args):
         """Handle select button click."""
         if self.checked_only:
@@ -271,7 +265,9 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         self.dic_dlgval["output"] =    self.chbox_output.IsChecked
         self.dic_dlgval["dwgexport"] = self.chbox_dwgexport.IsChecked
         self.dic_dlgval["filepath"] =  self.lb_filepath.Content
+        self.dic_dlgval["dxfexport"] = self.chbox_dxfexport.IsChecked
         self.Close()
+
 
     # tb previewbutton: breview_b
     def preview_click(self, sender, event):
@@ -279,11 +275,13 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         str2list = self.txtbox_paranames.Text.split(',')
         #stripwhitespacefrlistelem = list(map(str.strip, str2list))
         paranameseval = namefromparalist(FilteredElementCollector(doc)
-									.OfClass(ViewSheet).FirstElement(),str2list)
+                          .OfClass(ViewSheet).FirstElement(), str2list)
         self.lb_txtbox_preview.Text = paranameseval
+
 
     def pickfolder(self, sender, event):
         self.lb_filepath.Content = pick_folder()
+
 
     def search_txt_changed(self, sender, args):
         """Handle text change in search box."""
@@ -294,11 +292,13 @@ class SelectFromCheckBoxes(framework.Windows.Window):
 
         self._list_options(checkbox_filter=self.search_tb.Text)
 
+
     def clear_search(self, sender, args):
         """Clear search box."""
         self.search_tb.Text = ' '
         self.search_tb.Clear()
         self.search_tb.Focus()
+
 
 class BaseCheckBoxItem(object):
     """Base class for checkbox option wrapping another object."""
@@ -328,6 +328,7 @@ class BaseCheckBoxItem(object):
         """Unwrap and return wrapped object."""
         return self.item
 
+
 class SheetOption(BaseCheckBoxItem):
     def __init__(self, sheet_element):
         super(SheetOption, self).__init__(sheet_element)
@@ -343,17 +344,16 @@ class SheetOption(BaseCheckBoxItem):
     def number(self):
         return self.item.SheetNumber
 
-#func lookuppara; paraname as string: ex: "Sheet Number"
+
+#func lookuppara; paraname as string: ex: "Sheet Number" 
 #TODO: maybe replace with orderedParameters, or ParameterSet, 
 def lookupparaval(element, paraname): 
-	try: newp = element.LookupParameter(paraname)
-	except: newp = None; pass 
-	if newp:
-		if newp.StorageType == StorageType.String:    value = newp.AsString()
-		elif newp.StorageType == StorageType.Integer: value = newp.AsInteger()
-		elif newp.StorageType == StorageType.Double:  value = newp.AsDouble()
-		return value
-	else: return False
+        p = element.LookupParameter(paraname)
+        if p: 
+          d = {"String": p.AsString, "Double": p.AsDouble, "Integer": p.AsInteger}
+          return d[para.StorageType.ToString()]()
+        else: return None
+
 
 def namefromparalist(view, paralist):
 	import datetime
@@ -382,122 +382,135 @@ def namefromparalist(view, paralist):
 	filename = ''.join(tmp_filenamelist)
 	return filename
 
+
 def filenamelist(viewlist, paralist, dirpath):
-	filepathlist = []
-	filenamelist = []
-	for v in viewlist: 
-		tmpname = namefromparalist(v, paralist)
-		tmpname += ".pdf" 
-		filenamelist.append(tmpname)
-		filepathlist.append(dirpath + "\\" + tmpname )
-	return (filepathlist, filenamelist)
+    filepathlist = []
+    filenamelist = []
+    for v in viewlist: 
+        tmpname = namefromparalist(v, paralist)
+        tmpname += ".pdf" 
+        filenamelist.append(tmpname)
+        filepathlist.append(dirpath + "\\" + tmpname )
+    return (filepathlist, filenamelist)
+
 
 def open_dic(fn="dlgval.pkl"):
-	dic1 = {"ouput": True, "paranames": 'Sheet Number,_,Sheet Name'}
-	with open(os.path.dirname(__file__) + "\\" + fn, "a+b") as f: # create and read
-		f.seek(0)
-		try:
-			dic = pickle.load(f)
-			return dic
-		except: return dic1
+    dic1 = {"ouput": True, "paranames": 'Sheet Number,_,Sheet Name'}
+    with open(os.path.dirname(__file__) + "\\" + fn, "a+b") as f: # create and read
+        f.seek(0)  
+        try:       
+            dic = pickle.load(f)  
+            return dic            
+        except: return dic1       
+
 
 # write dialogData from input boxes as dictionary.
 def write_dic(newdic, olddic=open_dic(), fn= "dlgval.pkl"):
-	if newdic and not newdic == olddic:
-		with open(os.path.dirname(__file__) + "\\" + fn, "wb") as f:
-			pickle.dump(newdic, f)
+    if newdic and not newdic == olddic:
+        with open(os.path.dirname(__file__) + "\\" + fn, "wb") as f:
+            pickle.dump(newdic, f)            
 
 
 def selectsheets2print():
-	all_sheets = DB.FilteredElementCollector(doc).OfClass(DB.ViewSheet) \
-                   .WhereElementIsNotElementType().ToElements()
-	sortlist = sorted([SheetOption(x) for x in all_sheets], key=lambda x: x.number)
-	selsheet = SelectFromCheckBoxes(sortlist, title = "Select Sheets",
-						width = 500, height = 400, 
-						button_name = "Select / PRINT")
-	selsheet.ShowDialog() #.Net Method, Modal Window, no other window is active
-	write_dic(selsheet.dic_dlgval)
-	if selsheet.response:
-		return ([i.item for i in selsheet.response if i.state], selsheet.dic_dlgval)
-	else: 
-		sys.exit() #selsheet.response does not exist 
+    all_sheets = DB.FilteredElementCollector(doc).OfClass(DB.ViewSheet) \
+                        .WhereElementIsNotElementType().ToElements()
+    sortlist = sorted([SheetOption(x) for x in all_sheets], key = lambda x: x.number)
+    selsheet = SelectFromCheckBoxes(sortlist, title = "Select Sheets",
+                        width = 500, height = 400, 
+                        button_name = "Select / PRINT")  
+    selsheet.ShowDialog() #.Net Method, Modal Window, no other window is active
+    write_dic(selsheet.dic_dlgval)  
+    if selsheet.response:           
+        return ([i.item for i in selsheet.response if i.state], selsheet.dic_dlgval)
+    else: 
+        sys.exit() #selsheet.response does not exist 
+
+
+
+# fun Export DWG ---------------------------------------------
+def exportDwg(filename, view, folderpath): 
+    # DWGExport Options, get Current Active
+    firstdwgsetting = DB.FilteredElementCollector(doc).OfClass(ExportDWGSettings) \
+                                                      .FirstElement()
+    currentactiveset= firstdwgsetting.GetActivePredefinedSettings(doc)
+    dwgopt= currentactiveset.GetDWGExportOptions()
+    views = List[ElementId]() # empty .Net List
+    views.Add(view.Id)
+    result = doc.Export(folderpath, filename, views, dwgopt) #Revit API func
+    return result 
+
+
+def exportDxf(filename_string, view, folderpath_string): 
+    # DWGExport Options, get Current Active
+    firstdxfsetting = DB.FilteredElementCollector(doc).OfClass(DXFExportOptions) \
+                                                    .FirstElement()
+    currentactiveset= firstdwgsetting.GetActivePredefinedSettings(doc)
+    dwgopt= currentactiveset.GetDWGExportOptions()
+    views = List[ElementId]()
+    views.Add(view.Id)
+    result = doc.Export(folderpath_string, filename_string, views, dwgopt) #Revit API func
+    return result 
+
 
 #--- ELEMENT SELECTION ----------------------------------------
 selec_el = [doc.GetElement( elId ) for elId in uidoc.Selection.GetElementIds() \
-				if doc.GetElement(elId).GetType() == ViewSheet ] 
+                    if doc.GetElement(elId).GetType() == ViewSheet ] 
 #---END ELEMENT SELECTION -------------------------------------
 
-output = True 
+
+
+#output = True 
 if selec_el: #exist: 1 or 2, or 3 or ... , not 0
-	viewlist = selec_el
-	dlgdic = open_dic()
-	ouput = dlgdic["output"]
-	pdfexport = dlgdic["pdfexport"]
-else: 
-	viewlist, dlgdic = selectsheets2print()
-	output = dlgdic["output"] # True or False 
-	dwgexport = dlgdic["dwgexport"]
-if not viewlist: 
-	sys.exit() #pyrevit.script.exit() 
+    viewlist = selec_el
+    dlgdic = open_dic()
+    ouput = dlgdic["output"]
+    dwgexport = dlgdic["dwgexport"]
+
+try:  
+    viewlist, dlgdic = selectsheets2print() 
+    output = dlgdic["output"] # True or False 
+    dwgexport = dlgdic["dwgexport"] 
+    dxfexport = dlgdic["dxfexport"] 
+except: 
+    #print("Except Clause")
+    sys.exit() #pyrevit.script.exit()
+    pass
 
 
-### FUNCTIONS ############################################################
 
-# Filepath-----------------------------------------------
-
-# scriptpath = script.get_script_path()
-# if not scriptpath: 
-	# scriptpath = "C:\\Users\\Till\\Desktop"
-
-# if __shiftclick__: 
-	# with open(scriptpath + "\\path.txt", "w+") as f: 
-		# pass	
-	# forms.alert("filepath deleted!")
-
-# fun Export DWG ---------------------------------------------
-def ExportDwg(filename, view, folderpath): 
-	# DWGExport Options, get Current Active
-	firstdwgsetting = FilteredElementCollector(doc).OfClass(ExportDWGSettings) \
-													.FirstElement()
-	currentactiveset= firstdwgsetting.GetActivePredefinedSettings(doc)
-	dwgopt= currentactiveset.GetDWGExportOptions()
-	views = List[ElementId]()
-	views.Add(view.Id)
-	result = doc.Export(folderpath, filename, views, dwgopt) #Revit API func
-	return result 
-
-# Create fnlist FUN
-#def filenamelist(viewlist, paralist, dirpath = ''):
-dirpath = "C:\\"
-str2list = dlgdic["paranames"].split(",")
+# Create fnlist FUN 
+#def filenamelist(viewlist, paralist, dirpath = ''): 
+dirpath = "C:\\" 
+str2list = dlgdic["paranames"].split(",") 
 
 fnlist = filenamelist(viewlist, str2list, dirpath)
 
+
 # Printing Lists
 if output:
-	print "---Dialog Values--------------------------------"
+	print "---Dialog Values------------------------------------"
 	for i in dlgdic.items(): print i
 
-	print("\n--- Viewlist----------------------------------")
+	print("\n--- Viewlist--------------------------------------")
 	for i in viewlist: 
 		print( '{} - {}'.format(i.SheetNumber, i.ViewName))
 
-	print("\n--- FileNamelist------------------------------")
+	print("\n--- FileNamelist----------------------------------")
 	for i in fnlist[1]: print(i)
 	print("\n--- DWG Export -------------------------------")
 
 
 # Export DWG --- existing files with same name will be overwritten, No Error
-if not dlgdic["filepath"]:
-	print "--- ExportPath not set! ---"
-	sys.exit()
+if not dlgdic["filepath"]: 
+	print "\n---No ExportPath set! ---\n" 
+	sys.exit() 
 
-if dlgdic["dwgexport"]:
+
+if dlgdic["dwgexport"]: 
 	try:
 		errorReport = None
-
 		for fn, v in zip(fnlist[1], viewlist):
-			ExportDwg(fn, v, dlgdic["filepath"])
+			exportDwg(fn, v, dlgdic["filepath"])
 			if output: 
 				print("Success")
 	except:
@@ -506,6 +519,19 @@ if dlgdic["dwgexport"]:
 		errorReport = traceback.format_exc()
 		print(errorReport)
 
+
+if dlgdic["dxfexport"]: 
+	try: 
+		errorReport = None 
+		for fn, v in zip(fnlist[1], viewlist): 
+			exportDxf(fn, v, dlgdic["filepath"]) 
+			if output: 
+				print("Success") 
+	except:
+		# when error accurs anywhere in the process catch it 
+		import traceback
+		errorReport = traceback.format_exc()
+		print(errorReport)
 
 
 # TODO Test if the ProcessList is faster than for loop! 
@@ -523,7 +549,8 @@ if dlgdic["dwgexport"]:
 # except:
 	# if error accurs anywhere in the process catch it
 	# import traceback
-	# errorReport = traceback.format_exc()
+	# errorReport = traceback.format_exc() 
+
 
 endtime = timer.get_time()
 if output:
