@@ -19,7 +19,7 @@ The pdf_export tool exports:
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
  +   with papersize format automatically matching the sheetsize format
- +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-          Dialog. 
+ +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-          Dialog. (https://youtu.be/TtYq2vylD-M)
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
