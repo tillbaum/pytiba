@@ -11,7 +11,6 @@ This tool imitates a very useful function available in the Nemetschek Allplan Ca
 All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" in their typename can be hiden and unhiden. Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
 (https://youtu.be/YDGFrxg2Rfw)
 
-
 ### pdf_export tool 
 The pdf_export tool exports: 
  +   multiple Revit Sheets to pdf at the same time,  
@@ -27,14 +26,19 @@ The filename can consist of any parameter found in the properties of the SheetVi
 ### Sheets from Excel:
 Lets you easily create RevitSheetViews from an Excel worksheet table 
 Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
-If Sheet exist, only the parameters get updated.
+If Sheet already exist in Project, only the parameters get updated.
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.
 (https://youtu.be/rT_3vCVz4dU)
 ### Section Tools
+ - Create Section parallel to lines (Model- or Detaillines), 
+   (Select Detail/Modellines, run tool) 
+ - Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
+ - create section orthogonal to line (with GUI) (not yet implemented)
 This toolset lets you create Sections parallel to a line and orthogonal to a line.
 When more than one line is selected you can create a developed view of walls.
-Lets you automatically place the views in the right order on a sheet view (there is also a tool on the pyrevit tab for that purpose).
+Lets you automatically place the views in the right order on a sheet view 
+(there is also a tool on the pyrevit tab for that purpose).
 ### Schedule csv-Export
 Exports selected Schedules to csv-files with on click and also creates a Excel file.
 (Under developement)
