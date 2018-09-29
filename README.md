@@ -8,7 +8,9 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 ### Hide/Unhide HelpConstruction objects:
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
 This tool imitates a very useful function available in the Nemetschek Allplan Cad System. 
-All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" in their typename can be hiden and unhiden. Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
+All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" 
+in their typename can be hiden and unhiden. 
+Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
 (https://youtu.be/YDGFrxg2Rfw)
 
 ### pdf_export tool 
@@ -18,7 +20,8 @@ The pdf_export tool exports:
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
  +   with papersize format automatically matching the sheetsize format
- +   Sheetview selection is made either by selecting Sheets in Project Browser before the script is run or by Sheet-Selection-          Dialog. (https://youtu.be/TtYq2vylD-M)
+ +   Sheetview selection is made either by selecting Sheets in Project Browser 
+ before the script is run or by Sheet-Selection-Dialog. (https://youtu.be/TtYq2vylD-M)
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
