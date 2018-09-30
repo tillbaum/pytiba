@@ -48,8 +48,9 @@ Lets you automatically place the views in the right order on a sheet view
 (there is also a tool on the pyrevit tab for that purpose).
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files with on click and also creates a Excel file.
-(Under developement)
+Exports selected Schedules to csv-files and combine them in one Excel file.
+(https://youtu.be/6-b6gVSqS5E)
+
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
 Open a folder in Windows Explorer. 
