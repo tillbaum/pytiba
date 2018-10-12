@@ -7,7 +7,6 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 ## Features
 ### Hide/Unhide HelpConstruction objects:
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
-This tool imitates a very useful function available in the Nemetschek Allplan Cad System. 
 All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" 
 in their typename can be hiden and unhiden. 
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
@@ -16,7 +15,7 @@ Useful if you need to draw lines/textnotes/dimensions that should not appear on 
 ### pdf_export tool 
 The pdf_export tool exports: 
  +   multiple Revit Sheets to pdf at the same time,  
- +   with filenames specified by sheet  parameters for each sheet, i.e. 
+ +   with filenames specified by sheet parameters for each sheet, i.e. 
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
  +   with papersize format automatically matching the sheetsize format
@@ -25,13 +24,15 @@ The pdf_export tool exports:
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
-The filename can consist of any parameter found in the properties of the SheetView. Current date and/or time letters are also supported. 
+The filename can consist of any parameter found in the properties of the SheetView. 
+Current date and/or time letters are also supported. 
+
 ### Sheets from Excel:
 Lets you easily create RevitSheetViews from an Excel worksheet table 
 Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
 If Sheet already exist in Project, only the parameters get updated.
 ### Levels from Excel:
-Creates Levels from an Excel worksheet table.
+Creates Levels from an Excel worksheet table. 
 (https://youtu.be/rT_3vCVz4dU)
 ### Section Tools (tool collection) 
  + Create Sections along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
