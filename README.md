@@ -27,7 +27,7 @@ The filename can consist of any parameter found in the properties of the SheetVi
 Current date and/or time letters are also supported. 
 
 ### Sheets from Excel:
-Lets you easily create RevitSheetViews from an Excel worksheet table 
+Lets you easily create RevitSheetViews from an Excel worksheet table. 
 Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
 If Sheet already exist in Project, only the parameters get updated.
 
@@ -36,12 +36,14 @@ Creates Levels from an Excel worksheet table.
 (https://youtu.be/rT_3vCVz4dU)
 
 ### Section Tools (collection)
-+ Create Sections along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
++ Create Sections and SectionViews along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
 By selecting a connected line sequence, one can create a developed view of walls. 
-With the "Arrange Viewports Tool" one can arrange the SectionViews in the right order on the SheetView.
+Arrange Viewports: 
+With the "Arrange Viewports Tool" one can arrange the SectionViews in the right order on the Sheet.
 (Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
-This tool arranges the Viewports in order. Running the tool again reverses the order Arranges the selected Viewports on the sheet in the right order.
+This tool arranges the Viewports in order. Running the tool again reverses the order.
+Arranges the selected Viewports on the sheet in the right order.
 Running the tool again reverses the order. 
  
 This toolset lets you create Sections parallel to a line and orthogonal to a line.
