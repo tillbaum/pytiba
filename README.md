@@ -36,7 +36,7 @@ If Sheet already exist in Project, only the parameters get updated.
 Creates Levels from an Excel worksheet table. 
 (https://youtu.be/rT_3vCVz4dU)
 
-### Section Tools (tool collection) 
+### Section Tools (collection)
 + Create Sections along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
 By selecting a connected line sequence, one can create a developed view of walls. 
 With the "Arrange Viewports Tool" one can arrange the SectionViews in the right order on the SheetView.
