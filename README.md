@@ -14,12 +14,12 @@ Useful if you need to draw lines/textnotes/dimensions that should not appear on 
 
 ### pdf_export tool 
 The pdf_export tool exports: 
- +   multiple Revit Sheets to pdf at the same time,  
- +   with filenames specified by sheet parameters for each sheet, i.e. 
++   multiple Revit Sheets to pdf at the same time,  
++   with filenames specified by sheet parameters for each sheet, i.e. 
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
- +   with papersize format automatically matching the sheetsize format
- +   Sheetview selection is made either by selecting Sheets in Project Browser 
++   with papersize format automatically matching the sheetsize format
++   Sheetview selection is made either by selecting Sheets in Project Browser 
  before the script is run or by Sheet-Selection-Dialog. (https://youtu.be/TtYq2vylD-M)
 
 ### dwg/dxf_export tool:
@@ -31,16 +31,18 @@ Current date and/or time letters are also supported.
 Lets you easily create RevitSheetViews from an Excel worksheet table 
 Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
 If Sheet already exist in Project, only the parameters get updated.
+
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table. 
 (https://youtu.be/rT_3vCVz4dU)
+
 ### Section Tools (tool collection) 
- + Create Sections along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
++ Create Sections along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
 By selecting a connected line sequence, one can create a developed view of walls. 
 With the "Arrange Viewports Tool" one can arrange the SectionViews in the right order on the SheetView.
 (Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
- + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
-Arranges the selected Viewports on the sheet in the right order. 
++ Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
+This tool arranges the Viewports in order. Running the tool again reverses the order Arranges the selected Viewports on the sheet in the right order.
 Running the tool again reverses the order. 
  
 This toolset lets you create Sections parallel to a line and orthogonal to a line.
