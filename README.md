@@ -7,8 +7,7 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 ## Features
 ### Hide/Unhide HelpConstruction objects:
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
-All Detail- and Modellines, Textnotes and Dimension types which contain the letters "HK" 
-in their typename can be hiden and unhiden. 
+All latter objects which contain the letter "HK" in their typename can be hidden and unhidden. 
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print. 
 (https://youtu.be/YDGFrxg2Rfw)
 
