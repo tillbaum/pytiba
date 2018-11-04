@@ -59,14 +59,14 @@ def excel_read(origin = "A3", worksheetname="Sheets"):
 		ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
 	except EnvironmentError:
 		try: filepath = pick_file(file_ext='*')
-		except: sys.exit()
-		os.startfile(filepath)
-		from time import sleep
-		sleep(1)
-		try:
+		except: sys.exit() 
+		os.startfile(filepath) 
+		from time import sleep 
+		sleep(1) 
+		try:  
 			xlapp = Marshal.GetActiveObject('Excel.Application')
 			ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
-		except:
+		except:  
 			forms.alert('Excel Application not open!\nOpen Excel file with worksheet "Sheets" ')
 			dialogexcelnotopen.show()
 			sys.exit()

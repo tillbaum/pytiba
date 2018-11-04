@@ -1,11 +1,11 @@
 (dp0
 Vparanames
 p1
-VSheet Number,-,Sheet Name,_,date,_,time
+VSheet Number,-,Sheet Name
 p2
 sVprintfilepath
 p3
-VC:\u005cUsers\u005cTill\u005cDesktop
+VC:\u005cUsers\u005cTill\u005cDesktop\u005cRevitPrint
 p4
 sVoutput
 p5

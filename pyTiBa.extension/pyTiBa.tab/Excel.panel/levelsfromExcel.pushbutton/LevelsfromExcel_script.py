@@ -7,11 +7,12 @@ Data Row to start A4  A3 = Headers
 Elevation/ Levelname/ Create Flooprlan/ CreateCeilingPlan
 - uses last used LevelType 
 """
+
 from __future__ import print_function, division
 
-__title__ = "Levels\nfrom Excel"
+__title__ = "Levels\nfrom Excel"  
+__author__ = "Tillmann Baumeister"  
 
-__author__ = "Tillmann Baumeister"
 
 from Autodesk.Revit.DB import FilteredElementCollector, Transaction, BuiltInParameter, Level
 from Autodesk.Revit import DB
@@ -27,6 +28,7 @@ doc = __revit__.ActiveUIDocument.Document
 uiapp = __revit__
 app = uiapp.Application
 
+
 #todo: CALC Open and REad -----------------------------------
 
 # EXCEL OPEN and READ ---------------------------------------------------------
@@ -34,6 +36,7 @@ app = uiapp.Application
 import clr 
 clr.AddReference("Microsoft.Office.Interop.Excel")
 import Microsoft.Office.Interop.Excel as Excel
+
 
 def pick_file(file_ext='', files_filter='', init_dir='',
               restore_dir=True, multi_file=False, unc_paths=False):
@@ -51,29 +54,29 @@ def pick_file(file_ext='', files_filter='', init_dir='',
             return coreutils.dletter_to_unc(of_dlg.FileName)
         return of_dlg.FileName
 
+
 def excel_read(origin = "A3", worksheetname="Levels"):
-	try:
+	try:  
 		xlapp = Marshal.GetActiveObject('Excel.Application')
 		ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
 	except EnvironmentError:
-		try: 
-			filepath = pick_file(file_ext='*')
-		except: sys.exit()
-		os.startfile(filepath)
-		from time import sleep
-		sleep(1)
-		try:
-			xlapp = Marshal.GetActiveObject('Excel.Application')
-			ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet
-		except:
+		try:     
+			filepath = pick_file(file_ext='*') 
+		except: sys.exit()   
+		os.startfile(filepath)   
+		from time import sleep   
+		sleep(1)        
+		try:        
+			xlapp = Marshal.GetActiveObject('Excel.Application') 
+			ws = xlapp.sheets(worksheetname) #Name of the Excel Worksheet 
+		except:         
 			forms.alert('Excel Application not open!\nOpen Excel file with worksheet "Levels" ')
-			dialogexcelnotopen.show()
-			sys.exit()
-	except:
-		print("Error")
-		import traceback
-		print(traceback.format_exc())
-	
+			dialogexcelnotopen.show()  
+			sys.exit()  
+	except: 
+		print("Error") 
+		import traceback 
+		print(traceback.format_exc()) 
 	extent =  ws.Cells(ws.UsedRange.Rows(ws.UsedRange.Rows.Count).Row, 
 				ws.UsedRange.Columns(ws.UsedRange.Columns.Count).Column)
 	xlrng = ws.Range[origin, extent].Value2 # 2dimensional array 
@@ -98,6 +101,7 @@ def filter_excel_data(data_list):
 
 ex_row = filter_excel_data(data_list = excel_read())
 
+
 if __shiftclick__:
     print("--- EXCEL-LEVEL-LIST -----------------------------------------")
     for i in ex_row: print(i)
@@ -114,12 +118,13 @@ ceilingplantype = [k for k in FECviewfamtype if k.FamilyName == "Ceiling Plan"][
 
 t = DB.Transaction(doc, "Create Levels from Excel")
 t.Start()
+
 for i in ex_row:
-    try:
+    try:   
         elev = Decimal(i[1]).quantize(Decimal('0.01'),rounding="ROUND_HALF_UP")
-        elev1 = elev / Decimal(0.3048)
-        #Create LEVEL
-        lev = DB.Level.Create(doc, elev1)
+        elev1 = elev / Decimal(0.3048)  
+        #Create LEVEL  
+        lev = DB.Level.Create(doc, elev1)  
         lev.Name = str(i[0])
         # Create FloorPlan, CeilingPlan
         if i[2]:
