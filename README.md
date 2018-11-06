@@ -9,7 +9,7 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
 All latter objects which contain the letter "HK" in their typename can be hidden and unhidden. 
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.  
-Video: (https://youtu.be/YDGFrxg2Rfw)
+__Video:__ (https://youtu.be/YDGFrxg2Rfw)
 
 ### pdf_export tool 
 The pdf_export tool exports: 
@@ -23,7 +23,7 @@ The pdf_export tool exports:
 pdf_export_tool_documentation  pytiba/pytiba documentation/pdf_export/pdf_export_doc.md
 (work in progress) 
     
- Video: (https://youtu.be/TtYq2vylD-M)
+ __Video:__ (https://youtu.be/TtYq2vylD-M)
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
@@ -37,7 +37,7 @@ If Sheet already exist in Project, only parameters are updated.
 
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  
-Video: (https://youtu.be/rT_3vCVz4dU)
+__Video:__ (https://youtu.be/rT_3vCVz4dU)
 
 ### Section Tools (collection)
 + Create Sections and SectionViews along lines (Model- or Detaillines).  
@@ -45,11 +45,11 @@ Select Detail / Modellines, run tool. By selecting a connected line sequence, on
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
 This tool arranges the Viewports in order. Running the tool again reverses the order.   
 
-Video: Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
+__Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
 Exports selected Schedules to csv-files and combine them in one Excel file.  
-Video: (https://youtu.be/6-b6gVSqS5E)
+__Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
