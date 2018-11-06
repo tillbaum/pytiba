@@ -19,7 +19,8 @@ The pdf_export tool exports:
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
 +   with papersize format automatically matching the sheetsize format
 +   Sheetview selection is made either by selecting Sheets in Project Browser 
- before the script is run or by Sheet-Selection-Dialog. (https://youtu.be/TtYq2vylD-M)
+ before the script is run or by Sheet-Selection-Dialog.  
+ Video: (https://youtu.be/TtYq2vylD-M)
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
@@ -32,19 +33,15 @@ Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the Sh
 If Sheet already exist in Project, only the parameters get updated.
 
 ### Levels from Excel:
-Creates Levels from an Excel worksheet table. 
-(https://youtu.be/rT_3vCVz4dU)
+Creates Levels from an Excel worksheet table.  
+Video: (https://youtu.be/rT_3vCVz4dU)
 
 ### Section Tools (collection)
-+ Create Sections and SectionViews along lines (Model- or Detaillines). Select Detail / Modellines, run tool.
-By selecting a connected line sequence, one can create a developed view of walls. 
-Arrange Viewports: 
-With the "Arrange Viewports Tool" one can arrange the SectionViews in the right order on the Sheet.
-(Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
++ Create Sections and SectionViews along lines (Model- or Detaillines).  
+Select Detail / Modellines, run tool. By selecting a connected line sequence, one can create a developed view of walls. 
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
-This tool arranges the Viewports in order. Running the tool again reverses the order.
-Arranges the selected Viewports on the sheet in the right order.
-Running the tool again reverses the order. 
+This tool arranges the Viewports in order. Running the tool again reverses the order.  
+Video: Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
  
 This toolset lets you create Sections parallel to a line and orthogonal to a line.
 When more than one line is selected you can create a developed view of walls.
@@ -52,8 +49,8 @@ Lets you automatically place the views in the right order on a sheet view
 (there is also a tool on the pyrevit tab for that purpose).
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files and combine them in one Excel file.
-(https://youtu.be/6-b6gVSqS5E)
+Exports selected Schedules to csv-files and combine them in one Excel file.  
+Video: (https://youtu.be/6-b6gVSqS5E)
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
