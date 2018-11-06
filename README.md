@@ -18,8 +18,9 @@ The pdf_export tool exports:
     „SheetNumber_Revision_SheetName_date_time“  
     (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
 +   with papersize format automatically matching the sheetsize format
-+   Sheetview selection is made either by selecting Sheets in Project Browser 
- before the script is run or by Sheet-Selection-Dialog.   
++   Sheetview selection is made either by selecting Sheets in Project Browser
+    before the script is run or by Sheet-Selection-Dialog.
+pdf_export_tool_documentation (work in progress)
     
  Video: (https://youtu.be/TtYq2vylD-M)
 
