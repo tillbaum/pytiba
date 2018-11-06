@@ -30,7 +30,7 @@ Current date and/or time letters are also supported.
 ### Sheets from Excel:
 Lets you easily create RevitSheetViews from an Excel worksheet table. 
 Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
-If Sheet already exist in Project, only the parameters get updated.
+If Sheet already exist in Project, only parameters are updated. 
 
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  
