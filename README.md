@@ -13,14 +13,14 @@ __Video:__ (https://youtu.be/YDGFrxg2Rfw)
 
 ### pdf_export tool 
 The pdf_export tool exports: 
-+   multiple Revit Sheets to pdf at the same time,  
++   multiple Revit Sheets to pdf at the same time, 
 +   with filenames specified by sheet parameters for each sheet, i.e. 
-    „SheetNumber_Revision_SheetName_date_time“  
-    (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ).
-+   with papersize format automatically matching the sheetsize format
-+   Sheetview selection is made either by selecting Sheets in Project Browser
-    before the script is run or by Sheet-Selection-Dialog.  
-[pdf_export_documentation](pdf_export_doc.md)
+    „SheetNumber_Revision_SheetName_date_time“ 
+    (ex: “A01_b_Floorplan L00_17.06.18_11:34.pdf“ ). 
++   with papersize format automatically matching the sheetsize format 
++   Sheetview selection is made either by selecting Sheets in Project Browser 
+    before the script is run or by Sheet-Selection-Dialog. \
+[pdf_export_documentation](pdf_export_doc.md) 
 (work in progress) 
     
  __Video:__ (https://youtu.be/TtYq2vylD-M)
