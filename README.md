@@ -48,12 +48,12 @@ This tool arranges the Viewports in order. Running the tool again reverses the o
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files and combine them in one Excel file.  
+Exports selected Schedules to csv-files and imports them in one Excel Workbook file.  
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
-Open a folder in Windows Explorer. 
+Opens a folder in Windows Explorer. 
 Pressing Shift + Click lets you choose the Folder in your File System. 
 ### SaveAs
 Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
