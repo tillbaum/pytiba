@@ -37,7 +37,6 @@ if secviewlist:
     secviewlist[0].Name.Contains("Sec")
     for i in secviewlist: print i.Name
 
-    
     currentsheet = uidoc.ActiveView
     print currentsheet.Name 
 
