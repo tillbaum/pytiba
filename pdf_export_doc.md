@@ -21,7 +21,7 @@ pdf printer:
 I use PDFCreator. 
 to make the automatic pdf naming work the pdf profile setting must look like this. 
 
-![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator ProfileSettings.png)
+![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PDFCreator%20ProfileSettings.png)
 
 the pdf name input one provides in the pdf-print Dialog is a comma separated Revit-parameter list. 
 Every Parameter is looked up, extracted and added to a string which is the name of the pdf. 
