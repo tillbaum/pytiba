@@ -25,3 +25,6 @@ I use PDFCreator. To make the automatic pdf naming work the pdf profile setting 
 
 The pdf name input one provides in the pdf-print Dialog is a comma separated Revit-parameter list. 
 Every Parameter is looked up, extracted and added to a string which is the name of the pdf. 
+
+From what I found out it is also possible to programmatically create a PaperSizeFormat Object everytime you print and provide that to your Submit Print Method. 
+This has been described on Stack Overflow somewhere. 
