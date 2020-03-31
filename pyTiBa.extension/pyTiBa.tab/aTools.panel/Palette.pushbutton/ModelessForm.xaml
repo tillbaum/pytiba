@@ -1,0 +1,14 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Title="Palette" Height="500" Width="250" ShowInTaskbar="False" Topmost="True" 
+        WindowStartupLocation="CenterScreen"  ScrollViewer.VerticalScrollBarVisibility="Disabled"  HorizontalContentAlignment="Center"> 
+    <StackPanel Margin="10" HorizontalAlignment="Stretch"> 
+        <TextBlock x:Name="text1"  Text="" HorizontalAlignment="Left"  FontWeight="Bold"/> 
+        
+        <Button Content="TextNotes" Height="25"  Margin="0,5" Click="textnotes_click"/> 
+        <Button Content="DetailLines" Height="25"  Margin="0,5" Click="detaillines_click"/> 
+        <Button Content="Symbol" Height="25"  Margin="0,5" Click="genanno_click"/> 
+        <Button Content="Detail-Items" Height="25"  Margin="0,5" Click="detailitem_click"/> 
+
+    </StackPanel>
+</Window>

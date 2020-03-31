@@ -1,0 +1,16 @@
+(dp0
+Voutput
+p1
+I01
+sVdwgexport
+p2
+I01
+sVfilepath
+p3
+VC:\u005cUsers\u005cTill\u005cDesktop\u005cRevitPrint
+p4
+sVparanames
+p5
+VSheet Number,-,Sheet Name
+p6
+s.
