@@ -1,8 +1,7 @@
 # pytiba
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
-![pyTiBa](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/pyTiBa%20Tab.png)
-
+![pyTiBa](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pytiba.png) 
 
 ## Features
 ### Hide/Unhide HelpConstruction objects:
@@ -30,11 +29,6 @@ Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
 The filename can consist of any parameter found in the properties of the SheetView. 
 Current date and/or time letters are also supported. 
 
-### Sheets from Excel:
-Lets you easily create RevitSheetViews from an Excel worksheet table. 
-Parameters SheetNr, SheetName, IssueDate, Author, manual_Scale are set on the SheetView.
-If Sheet already exist in Project, only parameters are updated. 
-
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  
 __Video:__ (https://youtu.be/rT_3vCVz4dU)
@@ -61,13 +55,18 @@ Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar.
 Update all project-files/family-files in a folder (including subfolders) to the current running revit version.  
 (credits: www.sixtysecondrevit.com by J.Pierson)
 
+### Palettes (2D objects):
+All 2D objects on a modeless Palette:
+__Video:__ https://youtu.be/vMcQCD8qNIM 
 
+### ViewFilterPalette:
+Easily manage your ViewFilters from a Modeless Palette.
+__Video:__ https://youtu.be/HfmFzPlSlkI 
 
 -----------------------------------------------------------------------------------------------------
 
 
 # Credits
-Credits go to the following: 
 + Ehsan Iran-Nejad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the amazing IronPython Script Library / Environment for Revit. 
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
 + Daren Thomas, creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
