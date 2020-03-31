@@ -59,11 +59,14 @@ Update all project-files/family-files in a folder (including subfolders) to the 
 All 2D objects on a modeless Palette:
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
+### ViewFilterPalette:
+Easily manage your ViewFilters from a Modeless Palette.
+__Video:__ https://youtu.be/HfmFzPlSlkI 
+
 -----------------------------------------------------------------------------------------------------
 
 
 # Credits
-Credits go to the following: 
 + Ehsan Iran-Nejad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the amazing IronPython Script Library / Environment for Revit. 
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
 + Daren Thomas, creator of [RevitPythonShell](https://github.com/architecture-building-systems/revitpythonshell)
