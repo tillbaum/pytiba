@@ -53,6 +53,15 @@ __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Wall
 Exports selected Schedules to csv-files and imports them in one Excel Workbook file.  
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
+### DublicateSheets
+Dublicates a selected sheet (ProjectBrowser) including multiple TitleBlock and LegendViews
+
+### Delete
+Delete FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotation).
+
+### CopyTypes
+Copies FamilyTypes from other Projectfiles.
+
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
 Opens a folder in Windows Explorer. 
