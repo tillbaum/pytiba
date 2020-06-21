@@ -7,7 +7,8 @@ When you do this the paper format is also added to your Windows Print Forms.
 ![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pdf_export/PrintManagementForms.png)
 
 You need to add paper sizes of all the paper formats you usually need to your WindowsPrintForms. 
-The WindowsPrintForms are stored in the Windows Registry. You can export a regkey and transfer it to other Windows System. 
+The WindowsPrintForms are stored in the Windows Registry. 
+You can export this regkey and transfer it to other Windows System.  
 In this Repo there is a regkey included which, if added to your registry, adds PrintForms in cm-Format to your Registry. 
 
 PaperSizeFormats are [lengthxheight] 50cmx50cm up to 130cmx90cm, steps of 5cm. A height of 90cm is the limit because usual plotters use paperrolls with a max-height of 915mm. DinA1 - DinA3 Formats are included as well.
