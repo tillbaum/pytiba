@@ -54,20 +54,23 @@ Exports selected Schedules to csv-files and imports them in one Excel Workbook f
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
-Dublicates a selected sheet (ProjectBrowser) including multiple TitleBlock and LegendViews
+Dublicates a selected sheet (ProjectBrowser), including multiple TitleBlocks and LegendViews
+Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.
 
 ### Delete
-Delete FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotation).
+Easily delete not needed FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotation) in your Revit-Project. 
 
 ### CopyTypes
-Copies FamilyTypes from other Projectfiles.
+Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
 Opens a folder in Windows Explorer. 
 Pressing Shift + Click lets you choose the Folder in your File System. 
+
 ### SaveAs
 Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
+
 ### Update Fam/Prj
 Update all project-files/family-files in a folder (including subfolders) to the current running revit version.  
 (credits: www.sixtysecondrevit.com by J.Pierson)
