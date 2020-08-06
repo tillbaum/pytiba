@@ -10,7 +10,7 @@ All latter objects which contain the letter "HK" in their typename can be hidden
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.  
 __Video:__ (https://youtu.be/YDGFrxg2Rfw)
 
-### pdf_export tool 
+### pdf_export tool (One-Click-PDF-Export-Solution)
 The pdf_export tool exports: 
 +   multiple Revit Sheets to pdf at the same time, 
 +   with filenames specified by sheet parameters for each sheet, i.e. 
