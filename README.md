@@ -39,11 +39,12 @@ __Video:__ https://youtu.be/HfmFzPlSlkI
 
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  
-__Video:__ (https://youtu.be/rT_3vCVz4dU)
+__Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
 
 ### Section Tools (collection)
-+ Create Sections and SectionViews along lines (Model- or Detaillines).  
-Select Detail / Modellines, run tool. By selecting a connected line sequence, one can create a developed view of walls. 
++ Create Sections and SectionViews along lines (Model- or Detail-lines).  
+Select Detail / Modellines, run tool. 
+By selecting a connected line sequence, one can create a developed view of walls. 
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
 This tool arranges the Viewports in order. Running the tool again reverses the order.   
 
@@ -54,14 +55,26 @@ Exports selected Schedules to csv-files and imports them in one Excel Workbook f
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
-Dublicates a selected sheet (ProjectBrowser), including multiple TitleBlocks and LegendViews
+Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views
 Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.
+__Video:__(https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete
 Easily delete not needed FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotation) in your Revit-Project. 
 
 ### CopyTypes
 Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile
+__Video:__(https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
+
+### Transfer/Match Instance Parameter of same category-type
+This tool works like the "match properties" tool you find in word processing programs. Only for instance parameters of the same Type.
+Ex.: You want to change the level of a Wall it is attached to (Parameters: base- and top-constraint). 
+Just choose a scource walltype and pick the destination-type. Parameters are transferred from source to destination.
+https://www.youtube.com/watch?v=NOQwtMtklbY
+
+### Transfer/Match selected Parameters
+The same tool as above only that one can choose the parameters that are transferred in a selection dialog.
+
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
