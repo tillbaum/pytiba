@@ -30,7 +30,7 @@ The filename can consist of any parameter found in the properties of the SheetVi
 Current date and/or time letters are also supported. 
 
 ### Palettes (2D objects):
-All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail ) on a modeless Palette:
+All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items) on a modeless Palette:
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
 ### ViewFilterPalette:
