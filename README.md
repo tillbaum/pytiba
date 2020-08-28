@@ -30,7 +30,7 @@ The filename can consist of any parameter found in the properties of the SheetVi
 Current date and/or time letters are also supported. 
 
 ### Palettes (2D objects):
-All 2D objects on a modeless Palette:
+All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail ) on a modeless Palette:
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
 ### ViewFilterPalette:
@@ -57,24 +57,24 @@ __Video:__ (https://youtu.be/6-b6gVSqS5E)
 ### DublicateSheets
 Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views
 Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.
-__Video:__(https://www.youtube.com/watch?v=sUjJq2U34tg)
+__Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete
-Easily delete not needed FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotation) in your Revit-Project. 
+Easily delete NOT needed FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotations) in your current Revit-Project.
 
-### CopyTypes
-Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile
-__Video:__(https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
+### Copy Family-Types from other Projects to your current Project-Tool
+Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile. 
+__Video:__ (https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
 
 ### Transfer/Match Instance Parameter of same category-type
-This tool works like the "match properties" tool you find in word processing programs. Only for instance parameters of the same Type.
+This tool works like the "match properties" tool you find in text processing programs. It works for instance parameters of the same Type.
 Ex.: You want to change the level of a Wall it is attached to (Parameters: base- and top-constraint). 
-Just choose a scource walltype and pick the destination-type. Parameters are transferred from source to destination.
-https://www.youtube.com/watch?v=NOQwtMtklbY
+Just choose a scource walltype and pick the destination walltype. Parameters are transferred from source to destination i.e the 
+wall changes the level.
+__Video:__ (https://www.youtube.com/watch?v=NOQwtMtklbY)
 
 ### Transfer/Match selected Parameters
 The same tool as above only that one can choose the parameters that are transferred in a selection dialog.
-
 
 ### Family Folder, Project Folder
 Just a link to your important Revit Content Folders. 
@@ -91,8 +91,6 @@ Update all project-files/family-files in a folder (including subfolders) to the 
 
 
 -----------------------------------------------------------------------------------------------------
-
-
 # Credits
 + Ehsan Iran-Nejad for providing [PyRevit](https://github.com/eirannejad/pyRevit), the amazing IronPython Script Library / Environment for Revit. 
 + Gui Talariko, creator of [RevitPythonWrapper](https://revitpythonwrapper.readthedocs.io/en/latest/)
