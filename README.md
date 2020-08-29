@@ -22,7 +22,7 @@ The pdf_export tool exports:
 [pdf_export_documentation](pdf_export_doc.md) 
 (work in progress) 
     
- __Video:__ https://youtu.be/TtYq2vylD-M
+ __Video:__ https://youtu.be/uPb8Xyhw6hk 
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
