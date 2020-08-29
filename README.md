@@ -52,28 +52,28 @@ This tool arranges the Viewports in order. Running the tool again reverses the o
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files and imports them in one Excel Workbook file.  
+Exports selected Schedules to csv-files and imports them in one Excel Workbook file.  \
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
 Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views
-Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.
+Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.\
 __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete
-Easily delete NOT needed FamilyTypes of SystemCategories like Texnotes, imported LineStyles, GenericAnnotations) in your current Revit-Project
-and clean it up.
+Easily delete NOT needed FamilyTypes of SystemCategories like Texnotes, imported LineStyles, Filled Regions, GenericAnnotations)
+in your current Revit-Project and clean it up.\
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
 ### Copy Family-Types from other Projects to your current Project-Tool
-Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile. 
+Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile.\
 __Video:__ (https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
 
 ### Transfer/Match Instance Parameter of same category-type
 This tool works like the "match properties" tool you find in text processing programs. It works for instance parameters of the same Type.
 Ex.: You want to change the level of a Wall it is attached to (Parameters: base- and top-constraint). 
 Just choose a scource walltype and pick the destination walltype. Parameters are transferred from source to destination i.e the 
-wall changes the level.
+wall changes the level.\
 __Video:__ (https://www.youtube.com/watch?v=NOQwtMtklbY)
 
 ### Transfer/Match selected Parameters
