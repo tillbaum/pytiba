@@ -8,7 +8,7 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
 All latter objects which contain the letter "HK" in their typename can be hidden and unhidden. 
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.  
-__Video:__ (https://youtu.be/YDGFrxg2Rfw)
+__Video:__ https://youtu.be/5SQk24mHIhE
 
 ### pdf_export tool (One-Click-PDF-Export-Solution)
 The pdf_export tool exports: 
@@ -22,7 +22,7 @@ The pdf_export tool exports:
 [pdf_export_documentation](pdf_export_doc.md) 
 (work in progress) 
     
- __Video:__ (https://youtu.be/TtYq2vylD-M)
+ __Video:__ https://youtu.be/TtYq2vylD-M
 
 ### dwg/dxf_export tool:
 Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
@@ -62,7 +62,7 @@ __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 ### Delete
 Easily delete NOT needed FamilyTypes of SystemCategories like Texnotes, imported LineStyles, GenericAnnotations) in your current Revit-Project
 and clean it up.
-__Video:__ (https://youtu.be/rgCY0ChykrU)
+__Video:__ (https://youtu.be/rk5dsa-9PH0)
 
 ### Copy Family-Types from other Projects to your current Project-Tool
 Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile. 
