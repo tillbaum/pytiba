@@ -7,7 +7,7 @@ pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 ### Hide/Unhide HelpConstruction objects:
 Hides/ unhides Help Construction Objects (Hilfskonstruktionen) i.e: Detail- and Modellines, TextNotes, Dimensions. 
 All latter objects which contain the letter "HK" in their typename can be hidden and unhidden. 
-Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.  
+Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.\
 __Video:__ https://youtu.be/5SQk24mHIhE
 
 ### pdf_export tool (One-Click-PDF-Export-Solution)
@@ -20,7 +20,7 @@ The pdf_export tool exports:
 +   Sheetview selection is made either by selecting Sheets in Project Browser 
     before the script is run or by Sheet-Selection-Dialog. \
 [pdf_export_documentation](pdf_export_doc.md) 
-(work in progress) 
+(work in progress)\
     
  __Video:__ https://youtu.be/uPb8Xyhw6hk 
 
@@ -30,15 +30,16 @@ The filename can consist of any parameter found in the properties of the SheetVi
 Current date and/or time letters are also supported. 
 
 ### Palettes (2D objects):
-All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items) on a modeless Palette:
+All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items)\
+on a modeless Palette:\
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
 ### ViewFilterPalette:
-Easily manage your ViewFilters from a Modeless Palette.
+Easily manage your ViewFilters from a Modeless Palette.\
 __Video:__ https://youtu.be/HfmFzPlSlkI 
 
 ### Levels from Excel:
-Creates Levels from an Excel worksheet table.  
+Creates Levels from an Excel worksheet table.  \
 __Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
 
 ### Section Tools (collection)
@@ -46,7 +47,7 @@ __Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
 Select Detail / Modellines, run tool. 
 By selecting a connected line sequence, one can create a developed view of walls. 
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
-This tool arranges the Viewports in order. Running the tool again reverses the order.   
+This tool arranges the Viewports in order. Running the tool again reverses the order.   \
 
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
