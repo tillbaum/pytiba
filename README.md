@@ -60,7 +60,9 @@ Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.
 __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete
-Easily delete NOT needed FamilyTypes of SystemCategories (Texnotes, LineStyles, GenericAnnotations) in your current Revit-Project.
+Easily delete NOT needed FamilyTypes of SystemCategories like Texnotes, imported LineStyles, GenericAnnotations) in your current Revit-Project
+and clean it up.
+__Video:__ (https://youtu.be/rgCY0ChykrU)
 
 ### Copy Family-Types from other Projects to your current Project-Tool
 Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile. 
