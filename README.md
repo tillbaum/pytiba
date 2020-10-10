@@ -56,12 +56,12 @@ Exports selected Schedules to csv-files and imports them in one Excel Workbook f
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
-Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views
-Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.\
+Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views. \
+Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button. \
 __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete
-Easily delete NOT needed FamilyTypes of SystemCategories like Texnotes, imported LineStyles, Filled Regions, GenericAnnotations)
+Easily delete NOT needed FamilyTypes of SystemCategories like "not needed" Texnotes, CAD-imported LineStyles, Filled Regions, GenericAnnotations)
 in your current Revit-Project and clean it up.\
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
