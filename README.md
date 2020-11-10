@@ -46,7 +46,7 @@ __Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
 + Create Sections and SectionViews along lines (Model- or Detail-lines).  
 Select Detail / Modellines, run tool. 
 By selecting a connected line sequence, one can create a developed view of walls. 
-+ Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool)
++ Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool
 This tool arranges the Viewports in order. Running the tool again reverses the order.   \
 
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
