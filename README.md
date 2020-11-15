@@ -51,7 +51,7 @@ This tool arranges the Viewports in order. Running the tool again reverses the o
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files and imports them in one Excel Workbook file.  \
+Exports selected Schedules to csv-files and import them in one Excel Workbook file.  \
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
