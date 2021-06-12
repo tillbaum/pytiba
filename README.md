@@ -29,39 +29,39 @@ The filename can consist of any parameter found in the properties of the SheetVi
 Current date and/or time letters are also supported. 
 
 ### Palettes (2D objects):
-All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items)\
-on a modeless Palette:\
+All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items)  
+on a Modeless Palette:  
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
 ### ViewFilterPalette:
-Easily manage your ViewFilters from a Modeless Palette.\
+Easily manage your ViewFilters from a Modeless Palette.  
 __Video:__ https://youtu.be/HfmFzPlSlkI 
 
 ### Levels from Excel:
-Creates Levels from an Excel worksheet table.  \
+Creates Levels from an Excel worksheet table.  
 __Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
 
 ### Section Tools (collection)
 + Create Sections and SectionViews along lines (Model- or Detail-lines).  
-Select Detail / Modellines, run tool. \
+Select Detail / Modellines, run tool.  
 By selecting a connected line sequence, one can create a developed view of walls. 
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool).
-This tool arranges the Viewports in order. Running the tool again reverses the order.   \
+This tool arranges the Viewports in order. Running the tool again reverses the order.  
 
 __Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
-Exports selected Schedules to csv-files and import them in one Excel Workbook file.  \
+Exports selected Schedules to csv-files and import them in one Excel Workbook file.  
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
-Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views. \
-Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button. \
+Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views.  
+Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.  
 __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
 
 ### Delete SystemCategoryTypes
 Easily delete NOT needed FamilyTypes of SystemCategories like "not needed" Texnotes, CAD-imported LineStyles, Filled Regions, GenericAnnotations
-in your current Revit-Project and clean it up.\
+in your current Revit-Project and clean it up.  
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
 ### Copy Family-Types from other Projects to your current Project-Tool
