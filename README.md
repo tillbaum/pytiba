@@ -65,24 +65,24 @@ in your current Revit-Project and clean it up.
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
 ### Copy Family-Types from other Projects to your current Project-Tool
-Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile.\
+Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile.  
 __Video:__ (https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
 
 ### Transfer/Match Instance Parameter of same category-type
 This tool works like the "match properties" tool you find in text processing programs. It works for instance parameters of the same Type.
 Ex.: You want to change the level of a Wall it is attached to (Parameters: base- and top-constraint). 
-Just choose a scource walltype and pick the destination walltype. Parameters are transferred from source to destination i.e the 
-wall changes the level.\
-__Video:__ (https://www.youtube.com/watch?v=NOQwtMtklbY)
-
-### Transfer/Match selected Parameters
+Choose a scource walltype and pick the destination walltype.  
+Parameters are transferred from source to destination i.e the wall changes the level.  
+__Video:__ (https://www.youtube.com/watch?v=NOQwtMtklbY)  
+  
+### Transfer/Match selected Parameters  
 The same tool as above only that one can choose the parameters that are transferred in a selection dialog.
-
-### Family Folder, Project Folder
+  
+### Family Folder, Project Folder  
 Just a link to your important Revit Content Folders. 
 Opens a folder in Windows Explorer. 
 Pressing Shift + Click lets you choose the Folder in your File System. 
-
+  
 ### SaveAs
 Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
 
