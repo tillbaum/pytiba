@@ -1,6 +1,14 @@
 # pytiba
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
+@manual{bleyer2018numericaltours,
+title={Numerical Tours of Computational Mechanics with {FE}ni{CS}},
+DOI={10.5281/zenodo.1287832},
+howpublished = {https://comet-fenics.readthedocs.io},
+publisher={Zenodo},
+author={Jeremy Bleyer},
+year={2018}}
+
 ![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pytiba.png)
 
 ## Features
