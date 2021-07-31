@@ -1,14 +1,6 @@
 # pytiba
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
-@manual{bleyer2018numericaltours,
-title={Numerical Tours of Computational Mechanics with {FE}ni{CS}},
-DOI={10.5281/zenodo.1287832},
-howpublished = {https://comet-fenics.readthedocs.io},
-publisher={Zenodo},
-author={Jeremy Bleyer},
-year={2018}}
-
 ![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pytiba.png)
 
 ## Features
@@ -89,10 +81,10 @@ The same tool as above only that one can choose the parameters that are transfer
 ### Family Folder, Project Folder  
 Just a link to your important Revit Content Folders. 
 Opens a folder in Windows Explorer. 
-Pressing Shift + Click lets you choose the Folder in your File System. 
+Pressing Shift + Click lets you choose the Folder to open in your File System. 
   
 ### SaveAs
-Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. 
+Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. (Left Click on Button > Add to Quick launch Toolbar)
 
 ### Update Fam/Prj
 Update all project-files/family-files in a folder (including subfolders) to the current running revit version.  
