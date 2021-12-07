@@ -54,7 +54,7 @@ __persistentengine__ = True
 # Simple function we want to run
 def textnotes():
     try:
-        cmd = find_pyrevitcmd("pytibadev-pytibadev-atools-detail-modelessformtextnotes")  
+        cmd = find_pyrevitcmd("pytiba-pytiba-atools-detail-modelessformtextnotes")  
         command_instance= cmd() 
         command_instance.Execute(create_tmp_commanddata(),'',DB.ElementSet()) #Execute Method from  UI.IExternelCommand Method
     except: 
@@ -64,7 +64,7 @@ def textnotes():
     
 def detaillines():
     try:
-        cmd = find_pyrevitcmd("pytibadev-pytibadev-atools-detail-modelessformlines")  
+        cmd = find_pyrevitcmd("pytiba-pytiba-atools-detail-modelessformlines")  
         command_instance= cmd()
         command_instance.Execute(create_tmp_commanddata(),'',DB.ElementSet()) #Execute Method from  UI.IExternelCommand Method  
         #sessionmgr.execute_command("pytibadev-pytibadev-atools-detail-modelessformlines") #THis is the Command ID, Pressing Shift+WIN + Click on pushbutton
@@ -72,10 +72,10 @@ def detaillines():
         import traceback
         forms.alert(traceback.format_exc(), ok=True)
 
-
+# 
 def detailitem():
     try:
-        cmd = find_pyrevitcmd("pytibadev-pytibadev-atools-detail-modelessformdetailitem")  
+        cmd = find_pyrevitcmd("pytiba-pytiba-atools-detail-modelessformdetailitem")  
         command_instance= cmd()
         command_instance.Execute(create_tmp_commanddata(),'',DB.ElementSet()) #Execute Method from  UI.IExternelCommand Method  
         #sessionmgr.execute_command("pytibadev-pytibadev-atools-detail-modelessformlines") #THis is the Command ID, Pressing Shift+WIN + Click on pushbutton
@@ -85,7 +85,7 @@ def detailitem():
 
 def genericanno():
     try:
-        cmd = find_pyrevitcmd("pytibadev-pytibadev-atools-detail-modelessformgenericannotation")  
+        cmd = find_pyrevitcmd("pytiba-pytiba-atools-detail-modelessformgenericannotation")  
         command_instance= cmd()
         command_instance.Execute(create_tmp_commanddata(),'',DB.ElementSet()) #Execute Method from  UI.IExternelCommand Method  
         #sessionmgr.execute_command("pytibadev-pytibadev-atools-detail-modelessformlines") #THis is the Command ID, Pressing Shift+WIN + Click on pushbutton

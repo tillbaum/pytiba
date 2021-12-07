@@ -4,19 +4,18 @@ layout:
  - collection
  - openfolder
  - ViewsOnSheet
- - ------
+ - UpdateFamPrj
+ - ---
  - createsection
- - ------
+ - ---
  - copytypes
  - delete
  - dublicatesheet
- - ViewsOnSheet 
- - transferInstancePara 
- - transferInstanceParaSelectable 
- - ------
+ - ViewsOnSheet
+ - transferInstancePara
+ - transferInstanceParaSelectable
+ - ---
  - Palette
- - Model 
- - ViewFilterPalette
- - ">>>>>"   
+ - Model
  - Detail 
- - UpdateFamPrj
+ - ViewFilterPalette

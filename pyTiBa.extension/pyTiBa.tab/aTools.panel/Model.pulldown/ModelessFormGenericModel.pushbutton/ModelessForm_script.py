@@ -46,7 +46,8 @@ def firstrun():
     genmod2 = [i for i in genmod if not i.FamilyName.Equals("Model Text")]
 
 
-    typelist = sorted([(i.FamilyName + " - " + i.get_Parameter(DB.BuiltInParameter.SYMBOL_NAME_PARAM).AsString(), i) for i in genmod2], 
+    typelist = sorted([(i.FamilyName + " - " + i.get_Parameter(DB.BuiltInParameter.SYMBOL_NAME_PARAM) \
+                    .AsString(), i) for i in genmod2], 
                     key = lambda x: x[0] )
     return typelist
 
