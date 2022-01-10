@@ -14,20 +14,6 @@
         "website": "https://github.com/tillbaum",
         "image": "",
         "dependencies": []
-        },
-        {
-        "builtin": "False",
-        "enable": "True",
-        "type": "extension",
-        "rocket_mode_compatible": "True",
-        "name": "pyTiBaDev",
-        "description": "Develope pytiba",
-        "author": "Tillmann Baumeister",
-        "author-url": "https://github.com/tillbaum",
-        "url": "https://github.com/tillbaum/pytiba",
-        "website": "https://github.com/tillbaum",
-        "image": "",
-        "dependencies": []
         }
     ]
 }
