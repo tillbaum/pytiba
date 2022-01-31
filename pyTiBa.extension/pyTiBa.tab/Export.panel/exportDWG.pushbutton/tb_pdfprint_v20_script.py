@@ -78,8 +78,6 @@ def pick_folder():
         return fb_dlg.SelectedPath                   
 
 
-#func lookuppara; paraname as string: ex: "Sheet Number"
-#TODO: maybe replace with orderedParameters, or ParameterSet, 
 def lookupparaval(element, paraname): 
     try: newp = element.LookupParameter(paraname)
     except: newp = None; pass 
@@ -140,8 +138,10 @@ def dwgnamelist(viewlist, paralist, dirpath = ''):
 
 
 class SelectFromCheckBoxes(framework.Windows.Window): 
-    """ tb_modified Standard form to select from a list of check boxes.
     """
+    	tb_modified Standard form to select from a list of check boxes.
+    """
+
     xaml_source = 'tb_SelectFromCheckboxes.xaml' 
 
 # copied from class TemplateUserInputWindow ---------------------------
@@ -149,11 +149,13 @@ class SelectFromCheckBoxes(framework.Windows.Window):
                  title='User Input',
                  width= DEFAULT_INPUTWINDOW_WIDTH,
                  height= DEFAULT_INPUTWINDOW_HEIGHT, **kwargs):
+		
         """Initialize user input window."""
         wpf.LoadComponent(self, os.path.join(os.path.dirname(__file__), self.xaml_source))
         self.Title = title   
         self.Width = width   
         self.Height = height 
+	
         # WindowStartup Position Window hast Left + Top Property. 
         self.Left = System.Windows.SystemParameters.FullPrimaryScreenWidth / 2 - self.Width /2
         self.Top = 80  
@@ -177,7 +179,8 @@ class SelectFromCheckBoxes(framework.Windows.Window):
 
         button_name = kwargs.get('button_name', None)
         if button_name: 
-            self.select_b.Content = button_name  
+            self.select_b.Content = button_name 
+	
         self.list_lb.SelectionMode = Controls.SelectionMode.Extended
         self._verify_context()
         self._list_options()
@@ -534,15 +537,7 @@ def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
         print(errorReport) 
     return (papersizeobjls, psmess)
 
-# Comment matchPaperSize:
-# This was not easy . int(FEC..* 1000) ;
-# One TitleBlock with A0 Format  returns 1188[mm] != 1189, without int() it returns 1189.0
-# When I set the Variable TitleBlock manually to 1189x841  int(FEC...) returns 1189 ,841. --> works. 
-# If you check the dimensions in the family everything has the right size: width = 1189.00
 
-# createTmpPrintSetting FUNC: Create RevitAPI-PrintSetting "!temp", if not exist, create it
-    # Could have also done it with FEC OfClass(PrintSetting) 
-    # doc.GetPrintSettingIds() Set of all PrintSettingsIds, Method of doc.
 def createTmpPrintSetting():
     temp_printsetting = [ doc.GetElement(i) for i in doc.GetPrintSettingIds() 
                             if doc.GetElement(i).Name.Equals("pytiba") ] 
@@ -663,7 +658,6 @@ def exportDwg(filename, view, folderpath):
     return result 
 
 
-
 # Scheet selection dialog
 def selectsheets2print(): 
     FECall_sheets = DB.FilteredElementCollector(doc).OfClass(DB.ViewSheet) \
@@ -683,7 +677,6 @@ def selectsheets2print():
 
 # "printfilepath" in most printers it gets overwritten
 # by pdfPrinter, is set in Printer Properties, AdobePDF or PDFCreator work.
-
 
 def pdfexportsheet(dicprj, dicdlg, sheetlist):
 
@@ -752,11 +745,7 @@ def dwgexportview(viewlist):
     except: 
         import traceback
         print traceback.format_exc()
-        
-
-
-# dicdlg = dict()
-# dicprj = dict()      
+       
 
 
 #---Manual ELEMENT SELECTION in ProjectBrowser ----------------------------------------
@@ -816,8 +805,7 @@ if dicdlg["dwgexport"] and viewlist:
     #print "viewlisit"
     dwgexportview( viewlist)
 
-
-
+	
 endtime = timer.get_time()
 if dicdlg["output"]:   
     print(endtime)
