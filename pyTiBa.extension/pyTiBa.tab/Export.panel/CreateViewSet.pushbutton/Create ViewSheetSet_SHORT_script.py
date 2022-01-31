@@ -1,15 +1,13 @@
-""" create ViewSheetSet from selected 
-	Views in ProjectBrowser and save
-	under Name provided in InputDialog 
-	todo: show viewsets in InputWindow 
-	todo: show textinput field in selected_sheets Window Not a good idea """
+"""
+create ViewSheetSet from selected 
+Views in ProjectBrowser
+"""
 
 __title__ = "Create/Edit\nViewSheetSet\n(fr.Selection)"
 
 __author__ = 'Tillmann Baumeister'
 
-# import clr
-# clr.AddReference("RevitAPI") # .dll file 
+
 from Autodesk.Revit.DB import * # FilteredElementCollector, OfClass, BuiltInCategory, Transaction, TransactionGroup
 from pyrevit.script  import exit 
 import pyrevit 
@@ -54,15 +52,7 @@ printman.PrintRange = PrintRange.Select  # PrintRange is a own class in Revit.DB
 viewshsetting = printman.ViewSheetSetting  # returns ViewsheetSetting object, 
 
 
-# This is the first time using: with revit Transaction( ) statement. 
-# error in pyrevit/revit/transaction.py, line 110, in __init__,
-# Type _Error: expected Document, got str.
-
-
-#with revit.Transaction('Created Print Set'): # ...Transaction(doc, ' SomeText ') throws error
-
 FECviewsets = FilteredElementCollector(doc).OfClass(ViewSheetSet).ToElements()
-#Dictionary from FECviewsets, key=viewsheetset.Name : value=vss element 
 allviewsets = {vss.Name: vss for vss in FECviewsets} # is a set, a dictionary is created
 
 t = Transaction(doc,"Create Viewset")
