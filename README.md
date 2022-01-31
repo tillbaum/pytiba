@@ -68,7 +68,7 @@ Easily delete NOT needed FamilyTypes of SystemCategories like "not needed" Texno
 in your current Revit-Project and clean it up.  
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
-### Copy Family-Types from other Projects to your current Project-Tool
+### Copy Family-Types from other Projects to your current Project
 Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile.  
 __Video:__ (https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
 
