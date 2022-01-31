@@ -85,7 +85,7 @@ The same tool as above only that one can choose the parameters that are transfer
 ### Family Folder, Project Folder  
 Just a link to your important Revit Content Folders. 
 Opens a folder in Windows Explorer. 
-Pressing Shift + Click lets you choose the Folder to open in your File System. 
+Pressing Shift + Click lets you choose the Folder to open in your file system. 
   
 ### SaveAs
 Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. (Left Click on Button > Add to Quick launch Toolbar)
