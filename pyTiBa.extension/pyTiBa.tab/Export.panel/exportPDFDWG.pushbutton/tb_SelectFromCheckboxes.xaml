@@ -65,6 +65,7 @@
                               <Bold>keywords:</Bold> date -> 25-08-19, time -> 10.34
                               <LineBreak/> %d: day,  %m: month,  %y: year,  %H: hour,  %M: minute
                         </TextBlock>
+
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="preview_b" Content="Preview" 
                                 Click="preview_click" Margin="5,5,5,0" Width="50" Height="20" 
@@ -74,11 +75,13 @@
                                 <TextBox x:Name="lb_txtbox_preview" Text="" BorderThickness="1" />
                             </Label>
                         </StackPanel>
+
                         <StackPanel Orientation="Horizontal">
                             <Label Content="PrinterName:" /> 
                             <TextBox x:Name="txtbox_printername" Margin="5,5,5,5"
                                      Width="150" Height="20" />
                         </StackPanel>
+
                         <StackPanel Orientation="Horizontal">
                             <Label  Content="PrintPath:       "/>
                             <Button x:Name="but_printfilepath" Content="Select"
@@ -86,6 +89,10 @@
                             <Label x:Name="lb_printfilepath"
                                    Content=""/>
                         </StackPanel>
+                        
+                            <TextBlock Margin="5">
+                            PDFPrinter Settings: Layout: Automatic or Landscape, Title: &lt;InputFilename&gt;
+                            </TextBlock>
                     </StackPanel>
                 </GroupBox>
             
