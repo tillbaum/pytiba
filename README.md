@@ -58,10 +58,6 @@ Easily delete NOT needed FamilyTypes of SystemCategories like "not needed" Texno
 in your current Revit-Project and clean it up.  
 __Video:__ (https://youtu.be/rk5dsa-9PH0)
 
-### Copy Family-Types from other Projects to your current Project
-Easily transfer/copy all needed FamilyTypes from other Projectfiles to your current Revit Projectfile.  
-__Video:__ (https://www.youtube.com/watch?v=0MLAXWrOHQ8&t=2s)
-
 ### Transfer/Match Instance Parameter of same category-type
 This tool works like the "match properties" tool you find in text processing programs. It works for instance parameters of the same Type.
 Ex.: You want to change the level of a Wall it is attached to (Parameters: base- and top-constraint). 
