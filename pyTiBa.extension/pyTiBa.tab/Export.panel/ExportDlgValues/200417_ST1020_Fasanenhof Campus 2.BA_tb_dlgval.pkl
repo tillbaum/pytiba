@@ -1,6 +1,0 @@
-(dp0
-Vparanames
-p1
-VSheet Number,-Current Revision,_,Sheet Name,_,date,_,time
-p2
-s.
