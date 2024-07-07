@@ -89,7 +89,6 @@ class EventHandler(IExternalEventHandler):
     def Execute(self, uiapp):
         
         try:
-            #print "running Execute method of SimpleEventHandler"
             self.do_this(self.type)
         except InvalidOperationException:
             # If you don't catch this exeption Revit may crash.
@@ -109,7 +108,7 @@ for i, j in ha.items():
 # Create the External Event Handlers
 ev = { "ext_event" + str(i) : "ExternalEvent.Create(handler" + str(i) + ")" for i in range(len(typelist))}
 for i, j in ev.items():
-	exec( "{} = {}".format( i, j))
+    exec( "{} = {}".format( i, j))
 
 
 
