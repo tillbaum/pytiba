@@ -1,7 +1,7 @@
 (dp0
 Vprintername
 p1
-VPDFCreatorRevit
+VPDFCreator
 p2
 sVoutput
 p3
