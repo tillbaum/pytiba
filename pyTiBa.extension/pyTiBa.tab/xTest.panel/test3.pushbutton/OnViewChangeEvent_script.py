@@ -40,6 +40,7 @@ from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEvent
 
 def event_handler_function(sender, args):
     forms.alert("test", ok=True)
+
     __revit__.ViewActivating -= EventHandler[ViewActivatingEventArgs](event_handler_function)
     # unsubscriping from the ViewActivatedEvent WORKS !! 12.06.2021
 

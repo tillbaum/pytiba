@@ -7,7 +7,7 @@ Python scripts for Autodesk Revit
 
 import sys
 print(sys.version)
-from Autodesk.Revit import DB, UI
+from Autodesk.Revit import DB, UI 
 #from Autodesk.Revit.UI import 
 from Autodesk.Revit.DB import FilledRegion, FilledRegionType, Line, CurveLoop, ElementId, FilteredElementCollector, Transaction, XYZ
 from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
@@ -44,8 +44,8 @@ def createobj(type):
         t = Transaction(doc, "FilledRegion")
         t.Start()
         doc.SetDefaultElementTypeId(typegroup, type.Id)
-        #doc.SetDefaultFamilyTypeId(famCategoryId, type.Id)
-        t.Commit()
+        #doc.SetDefaultFamilyTypeId(famCategoryId, type.Id) 
+        t.Commit() 
         
         # Postable Command
         revitcomid= UI.RevitCommandId.LookupPostableCommandId(UI.PostableCommand.FilledRegion)
