@@ -34,6 +34,7 @@ secviewlist = [doc.GetElement(elId) for elId in uidoc.Selection.GetElementIds()]
 
 sheetview = list()
 viewlist = list()
+
 [viewlist.append(i) if i.Category.Name.Equals("Views") else sheetview.append(i) if i.Category.Name.Equals("Sheets") else False
             for i in secviewlist]
 
