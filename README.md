@@ -1,7 +1,7 @@
 # pytiba
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
-[![GitHub license](https://img.shields.io/badge/License-GPL3-brightgreen.svg)](https://github.com/tillbaum/pytiba/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/tillbaum/pytiba/blob/master/LICENSE)
 
 ![](https://github.com/tillbaum/pytiba/blob/master/pytiba%20documentation/pytiba.png)
 
