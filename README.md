@@ -13,7 +13,7 @@ Useful if you need to draw lines/textnotes/dimensions that should not appear on 
 __Video:__ https://youtu.be/5SQk24mHIhE
 
 ### pdf_export tool (One-Click-PDF-Export-Solution) 
-Note: with Revit 2022 Version this feature is implemented natively
+Note: with Revit 2022 Version this feature is implemented natively \
 
 The pdf_export tool exports: 
 +   multiple Revit Sheets to pdf at the same time, 
@@ -49,7 +49,7 @@ Exports selected Schedules to csv-files and import them in one Excel Workbook fi
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
 ### DublicateSheets
-Note: with Revit 2022 Version this feature is implemented natively
+Note: with Revit 2022 Version this feature is implemented natively \
 
 Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views.  
 Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.  
@@ -76,7 +76,8 @@ Opens a folder in Windows Explorer.
 Pressing Shift + Click lets you choose the Folder to open in your file system. 
   
 ### SaveAs
-Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. (Left Click on Button > Add to Quick launch Toolbar)
+Adds the missing SaveAs Button. Can be added to the Quick Launch Toolbar. \
+(Left Click on Button > Add to Quick launch Toolbar)
 
 ### Update Fam/Prj
 Update all project-files/family-files in a folder (including subfolders) to the current running revit version.  
