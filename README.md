@@ -35,9 +35,6 @@ All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail I
 on a Modeless Palette:  
 __Video:__ https://youtu.be/vMcQCD8qNIM 
 
-### ViewFilterPalette:
-Easily manage your ViewFilters from a Modeless Palette.  
-__Video:__ https://youtu.be/HfmFzPlSlkI 
 
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  

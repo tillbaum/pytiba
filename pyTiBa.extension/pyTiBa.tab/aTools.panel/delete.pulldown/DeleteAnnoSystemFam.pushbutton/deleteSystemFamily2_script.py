@@ -7,7 +7,7 @@ Project-file
 #! python3
 
 __title__ = "DEL_TextNote,FilledReg,LineStyle,TemplateView" 
-__author__ = "TBaumeister" 	
+__author__ = "TBaumeister" 
 
 
 import sys
@@ -16,7 +16,7 @@ from System.Collections.Generic import List
 
 from Autodesk.Revit.DB import * #(FilteredElementCollector, TextNoteType, DimensionType,
                                 #FilledRegionType, BuiltInCategory)
-from Autodesk.Revit import DB                           
+from Autodesk.Revit import DB 
 from pyrevit import forms
 from pyrevit.forms import TemplateListItem, SelectFromList
 
@@ -94,14 +94,14 @@ def commandswitchdimtype(doc):
     fecdim = FilteredElementCollector(doc).OfClass(DB.DimensionType).ToElements()           
             
 
-    sysfamtype = {	"dimLinear" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.Linear)],
+    sysfamtype = {  "dimLinear" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.Linear)],
                     "dimAngular" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.Angular)],
                     "dimRadial" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.Radial)],
                     "dimDiameter" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.Diameter)],
                     "SpotCoordinate" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.SpotCoordinate)],
                     "SpotElevation" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.SpotElevation)],
                     "SpotSlope" : [i for i in fecdim if i.StyleType.Equals(DB.DimensionStyleType.SpotSlope)] }
-  		  	  
+        
     return sysfamtype[dimoption] 
 
  
@@ -168,7 +168,7 @@ def select_types(sysfam): #list alltypes
                                                height=850,
                                                multiselect=True,
                                                filterfunc=None)
-    return selected_types										   										   
+    return selected_types  
 
 
 
@@ -179,14 +179,14 @@ def deletefromdoc(obj_del):
     t= DB.Transaction(doc, "Delete SystemFamilyType")
     t.Start()
     for i in obj_del:
-		try: 
-			print " {}, id={}  --> deleting".format(extract(i), i.Id)
-			doc.Delete(i.Id)
-			print " Done" 
-		except:
-			import traceback
-			print traceback.format_exc()
-    t.Commit()			
+        try: 
+            print " {}, id={}  --> deleting".format(extract(i), i.Id)
+            doc.Delete(i.Id)
+            print " Done" 
+        except:
+            import traceback
+            print traceback.format_exc()
+    t.Commit()  
 
     
 # sysfam = commandswitch()
