@@ -1,0 +1,21 @@
+layout:
+ - saveas
+ - hk
+ - collection
+ - openfolder
+ - ViewsOnSheet
+ - UpdateFamPrj
+ - ---
+ - createsection
+ - ---
+ - copytypes
+ - delete
+ - dublicatesheet
+ - ViewsOnSheet
+ - transferInstancePara
+ - transferInstanceParaSelectable
+ - ---
+ - Palette
+ - Model
+ - Detail 
+ - ViewFilterPalette

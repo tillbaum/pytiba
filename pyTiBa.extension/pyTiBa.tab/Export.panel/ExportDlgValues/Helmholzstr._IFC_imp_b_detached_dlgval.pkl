@@ -1,0 +1,27 @@
+(dp0
+Vprintername
+p1
+VPDFCreatorRevit
+p2
+sVpdfexport
+p3
+I1
+sVprintfilepath
+p4
+VC:\u005cUsers\u005ctill_laptop\u005cdesktop
+p5
+sVoutput
+p6
+I1
+sVdwgexport
+p7
+I0
+sVparanames
+p8
+VSheet Number,-,Sheet Name,_,date,_,time
+p9
+sVparanames
+p10
+VSheet Number,-,Sheet Name,_,date,_,time
+p11
+s.
