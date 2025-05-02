@@ -13,7 +13,7 @@ Useful if you need to draw lines/textnotes/dimensions that should not appear on 
 __Video:__ https://youtu.be/5SQk24mHIhE
 
 ### pdf_export tool (One-Click-PDF-Export-Solution)
-## (update: with Revit 2022 Version this feature is implemented natively)
+#### (with Revit 2022 Version this feature is implemented natively)
 The pdf_export tool exports: 
 +   multiple Revit Sheets to pdf at the same time, 
 +   with filenames specified by sheet parameters for each sheet, i.e. 
