@@ -12,7 +12,8 @@ All latter objects which contain the letter "HK" in their typename can be hidden
 Useful if you need to draw lines/textnotes/dimensions that should not appear on your sheets you want to print.\
 __Video:__ https://youtu.be/5SQk24mHIhE
 
-### pdf_export tool (One-Click-PDF-Export-Solution, update: with Revit 2022 Version this feature is implemented natively) 
+### pdf_export tool (One-Click-PDF-Export-Solution)
+## (update: with Revit 2022 Version this feature is implemented natively)
 The pdf_export tool exports: 
 +   multiple Revit Sheets to pdf at the same time, 
 +   with filenames specified by sheet parameters for each sheet, i.e. 
@@ -21,7 +22,6 @@ The pdf_export tool exports:
 +   with papersize format automatically matching the sheetsize format 
 +   Sheetview selection is made either by selecting Sheets in Project Browser 
     before the script is run or by Sheet-Selection-Dialog. \
-[pdf_export_documentation](pdf_export_doc.md) (work in progress)   
     
  __Video:__ https://youtu.be/uPb8Xyhw6hk 
 
