@@ -30,12 +30,6 @@ Exports multiple Revit Sheets to dwg or dxf format with user specified filename.
 The filename can consist of any parameter found in the properties of the SheetView. 
 Current date and/or time letters are also supported. 
 
-### Palettes (2D objects):
-All 2D objects (currently TextNotes, Detail-Lines, Generic Annotations, Detail Items)  
-on a Modeless Palette:  
-__Video:__ https://youtu.be/vMcQCD8qNIM 
-
-
 ### Levels from Excel:
 Creates Levels from an Excel worksheet table.  
 __Video:__ (https://www.youtube.com/watch?v=YW9SxNtxfvE)
