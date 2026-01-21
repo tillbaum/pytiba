@@ -100,8 +100,13 @@
                             IsChecked="False" />
                 <CheckBox x:Name="chbox_output" 
                             Margin="10,5,0,5" 
-                            Content="Show Output Window/Report" 
+                            Content="Show Output Window" 
                             IsChecked= "True" />
+                <CheckBox x:Name="chbox_messageboxes" 
+                            Margin="10,5,0,5" 
+                            Content="Messageboxes" 
+                            IsChecked= "False" />
+                            
                 <Button HorizontalAlignment="Right" x:Name="b_savesettings" Content="Save Settings"
                                     Margin= "20,5,0,5" Width="80" Height="20" Click="savesettings_click"/>
             </StackPanel>
