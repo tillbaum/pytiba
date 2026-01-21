@@ -22,6 +22,7 @@ GNU General Public License, version 3
 #;there are now 2 Dialog Pickle files dumped, one for the Parameterlist, which is dependend on the Project.
 #(It gets dumped in the Folder ExpotDlgValues), one for other Dialog Values: Path, output, pdfexport, dwgexport
 # (get dumped in dlgval.pkl file in same folder as script. 
+# v21, 21.01.2026, added .json Dialog Values file dump, removed cPickle module, added os.dir_exists(path) to check if Project_Dlg_Data Folder exists
 
 from __future__ import division
 
@@ -29,17 +30,20 @@ __title__ = "Export\nPDF"
 __author__ = "TBaumeister"
 
  
-# TODO, CleanUp CHECK Imports, what do I need?? 
  
 import sys, os
 from functools import wraps
 import math	# math.ceil  
 import time # sleep()    
 import traceback         
-import cPickle as pickle 
+import json
+from pathlib import Path
 
 import clr # import common language runtime .Net Laufzeitumgebung 
 from System.Collections.Generic import List
+clr.AddReference("System.Windows.Forms")
+from System.Windows.Forms import MessageBox
+
 
 from Autodesk.Revit.DB import *
 from Autodesk.Revit import DB
@@ -71,6 +75,17 @@ try:
 except NameError: 
      __file__ = "E:\OneDrive\Pytiba\pytiba\pyTiBaDev.extension\pyTiBaDev.tab\xtest2.panel\pdfexport.pushbutton\\" 
 
+# __file__Paths , BASE_DIR
+BASE_DIR = Path(__file__).resolve().parent
+
+folder_path = str(BASE_DIR / "Project_Dlg_Data") #Project_Dialo_Values_Folder
+prj_dlg_file = str(BASE_DIR / "Project_Dlg_Data" / "{}_dlgval.json".format(uidoc.Document.Title)) # #Project_Dialog_Values_File
+dlgval_file = str(BASE_DIR / "dlgval.json")  # Dialog_Values_File
+
+
+
+
+
 
 def pick_folder(): 
     fb_dlg = Forms.FolderBrowserDialog()             
@@ -99,8 +114,8 @@ def namefromparalist(view, paralist):
     for i in paralist: 
         if i in ['_', ' ', '.', '-', ';','']:
             tmp_filenamelist.append(i)
-        elif i in ["date", "time"]:
-            datetime = m.strftime(eval(i))
+        elif i in ["date", "time", "Date", "Time"]:
+            datetime = m.strftime(eval(i.lower()))
             tmp_filenamelist.append(datetime)
         #elif i in ["%d","%m","%y","%Y","%H","%M"]:
         elif i.startswith("%"):
@@ -182,33 +197,32 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         self._verify_context()
         self._list_options()
 
-        printername = doc.PrintManager.PrinterName 
-        dialogfile= uidoc.Document.Title  + "_dlgval.pkl"
+        # printername = doc.PrintManager.PrinterName 
+        # dialogfile= uidoc.Document.Title  + "_dlgval.pkl"
+        # dialogfile= uidoc.Document.Title  + "_dlgval.json"
         
-        #tb_ADDED: Values from Checkbox and Textinput ----------------------------
+        #Save Values from Checkbox and Textinput in .json ----------------------------
         self.dicprj = {}
         self.dicdlg = {}
         
-        with open(os.path.dirname(os.path.dirname(__file__)) + "\\ExportDlgValues\\"
-                          + uidoc.Document.Title + "_dlgval.pkl", "ab+") as f: # create and read
-            f.seek(0) #set cursor to 0 position
-            try:
-                self.dicprj = pickle.load(f)
-            except: 
-                pass
-                #print dialogfile + "-file created!" 
-            
-        
-        with open(os.path.dirname(__file__) + "\\dlgval.pkl", "ab+") as g:   # create and read 
-            g.seek(0)
-            try:
-                self.dicdlg = pickle.load(g) 
-            except: pass
-            
+        # Load Dialog Values fomr .json-file, it its not there create file
+        try:
+            with open(prj_dlg_file, "a+") as f: # create and read
+                f.seek(0) #set cursor to 0 position
+                self.dicprj = json.load(f) 
+
+            with open(dlgval_file, "a+") as g:   # create and read 
+                g.seek(0)
+                self.dicdlg = json.load(g) 
+        except: 
+            import traceback
+            traceback.print_exc()
+            #print dialogfile + "-file created!" 
+
         try: 
             self.dicprj
             self.dicdlg# if dicprj not exists -> Except clause 
-            #print self.dicprj # testing  
+
             self.txtbox_paranames.Text = self.dicprj["paranames"]  
             #self.expander.Header = self.dicprj["paranames"]   
             self.txtbox_printername.Text = self.dicdlg["printername"] 
@@ -216,15 +230,17 @@ class SelectFromCheckBoxes(framework.Windows.Window):
             self.chbox_output.IsChecked = self.dicdlg["output"]   
             self.chbox_pdfexport.IsChecked = self.dicdlg["pdfexport"]
             self.chbox_dwgexport.IsChecked = self.dicdlg["dwgexport"]
+            self.chbox_messageboxes.IsChecked = self.dicdlg["messageboxes"]
         except:
             # print "Exception" 
-            # print traceback.format_exc()
-            #Standard Dialog Values  ------------------------    
-            self.txtbox_paranames.Text = "Sheet Number,-,Sheet Name"
+            # traceback.print_exc()
+            # default to Standard Dialog Values  ------------------------    
+            self.txtbox_paranames.Text = "Sheet Number,-,Sheet Name,_,date,_,time"
             #self.expander.Header += "Sheet Number,_,Sheet Name"
             self.chbox_output.IsChecked = True   
             self.lb_printfilepath.Content = pyrevit.USER_DESKTOP
             self.txtbox_printername.Text = "PDFCreator"
+            self.chbox_messageboxes.IsChecked = True
             
             
 # copied from WMFWindow
@@ -338,25 +354,32 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         self.dicdlg["output"] = self.chbox_output.IsChecked      
         self.dicdlg["pdfexport"] = self.chbox_pdfexport.IsChecked
         self.dicdlg["dwgexport"] = self.chbox_dwgexport.IsChecked
+        self.dicdlg["messageboxes"] = self.chbox_messageboxes.IsChecked
         self.Close()  
 
     def savesettings_click(self, sender, args):
         """Handle savesettings button click."""
         self.dicprj["paranames"] = self.txtbox_paranames.Text    
+
         self.dicdlg["printername"] =  self.txtbox_printername.Text
         self.dicdlg["printfilepath"] = self.lb_printfilepath.Content
         self.dicdlg["output"] = self.chbox_output.IsChecked      
         self.dicdlg["pdfexport"] = self.chbox_pdfexport.IsChecked
         self.dicdlg["dwgexport"] = self.chbox_dwgexport.IsChecked
-        #self.expander.Header = self.txtbox_paranames.Text     
-        with open(os.path.dirname(os.path.dirname(__file__)) + "\\ExportDlgValues\\"
-                                     + uidoc.Document.Title + "_dlgval.pkl", "w+b") as f:
-            pickle.dump(self.dicprj, f)
-            
-        with open(os.path.dirname(__file__) + "\\dlgval.pkl", "w+b") as fa:
-            pickle.dump(self.dicdlg, fa)
+        self.dicdlg["messageboxes"] = self.chbox_messageboxes.IsChecked
+        # print(folder_path)
+        # print(prj_dlg_file)
+        # print(dlgval_file)
 
-        forms.alert("Dialog Settings saved!", ok=True) 
+        with open(prj_dlg_file, "w+") as f:
+            json.dump(self.dicprj, f, indent=4)
+
+        with open(dlgval_file, "w+") as g:
+            json.dump(self.dicdlg, g, indent=4) 
+
+        # forms.alert(, ok=True) 
+        if self.chbox_messageboxes.IsChecked: 
+            MessageBox.Show("Dialog Settings saved!", "Export PDF")
 
     # tb previewbutton: preview_b
     def preview_click(self, sender, event):
@@ -369,6 +392,7 @@ class SelectFromCheckBoxes(framework.Windows.Window):
         except: pass           
         paranamesval = namefromparalist(sheetobj, str2list) if sheetobj else "No Sheet selected"
         self.lb_txtbox_preview.Text = paranamesval
+
 
     def selectprintfilepath_click(self, sender, event): 
         ''' open folder '''
@@ -473,13 +497,16 @@ def matchPaperSize(viewlist, pdfPrinterName, counterlimit = 7):
             filter_double_rule = \
                         FilterDoubleRule(ParameterValueProvider(ElementId(bip_shwi)), \
                         FilterNumericGreater(), 0.20 / 0.3048, 1E-2)
+            
             FECtb = FilteredElementCollector(doc, v.Id) \
                         .WherePasses(ElementParameterFilter(filter_double_rule)) \
                         .ToElements()
+            
             bip_wi = int(FECtb[0].get_Parameter(bip_shwi).AsDouble() * 0.3048 *1000)  # from m to cm
             bip_hei = int(FECtb[0].get_Parameter(bip_shhei).AsDouble() * 0.3048 *1000)
             # print bip_wi, bip_hei , float(bip_wi), float(bip_hei), int(bip_wi), int(bip_hei) 
             # cut of all irelevant  0.750000011 = 750 mm
+
             wi_cm = bip_wi / 10     #__future__ division ex: 297 / 10 = 29.7 
             hei_cm = bip_hei / 10
             shsize_str = ''.join([str(wi_cm), "x", str(hei_cm)])
@@ -645,13 +672,16 @@ def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
         except: pass 
     return errorReport
 
+
+
 # fun Export DWG ---------------------------------------------
 def exportDwg(filename, view, folderpath): 
     # DWGExport Options, get Current Active
     firstdwgsetting = DB.FilteredElementCollector(doc).OfClass(ExportDWGSettings) \
                                                       .FirstElement()
     if not firstdwgsetting:
-        forms.alert("There is NO DwgSetting in Project", ok=True)
+        # forms.alert("There is NO DwgSetting in Project", ok=True)
+        MessageBox.Show("DwgSetting in Project missing") if dicdlg["messageboxes"] else None
     currentactiveset= firstdwgsetting.GetActivePredefinedSettings(doc)
     if not currentactiveset:
         dwgopt = firstdwgsetting.GetDWGExportOptions()
@@ -694,7 +724,7 @@ def pdfexportsheet(dicprj, dicdlg, sheetlist):
         # returns tuple: (papersizeobjlist, printername )
 
     if dicdlg["output"]:
-        print " SelectSheets-DialogValues -------------------------"
+        print (" SelectSheets-DialogValues -------------------------")
         for i in dicdlg.items(): print i
 
         print("\n ViewList ----------------------------------")
@@ -718,10 +748,11 @@ def pdfexportsheet(dicprj, dicdlg, sheetlist):
             pview = printview(v, fp ,ps ,dicdlg["printername"])
             if dicdlg["output"]: 
                 print(pview)
-        forms.alert("{} PDF Sheet printed!".format(len(sheetlist)) , ok=True )
+        # forms.alert("{} PDF Sheet printed!".format(len(sheetlist)) , ok=True )
+        MessageBox.Show("{} PDFs exported".format(len(sheetlist))) if dicdlg["messageboxes"] else None
     except:
         # when error accurs anywhere in the process catch it 
-        print traceback.format_exc() 
+        print (traceback.format_exc())
 
 
 def dwgexportsheet(dicprj, dicdlg, sheetlist): 
@@ -731,11 +762,12 @@ def dwgexportsheet(dicprj, dicdlg, sheetlist):
     try: 
         for fn, v in zip(fnlistdwg[1], sheetlist): 
             exportDwg(fn, v, dicdlg["printfilepath"]) 
-        forms.alert("{} dwgs exported".format(len(sheetlist)), ok=True)    
+        # forms.alert("{} dwgs exported".format(len(sheetlist)), ok=True)  
+        MessageBox.Show("{} DWGs exported!".format(len(sheetlist)))  if dicdlg["messageboxes"] else None
     except:
         ##when error accurs anywhere in the process catch it
         import traceback
-        print traceback.format_exc()
+        print (traceback.format_exc())
 
           
 
@@ -748,10 +780,10 @@ def dwgexportview(viewlist):
         for name, view  in zip( namelist, viewlist):
             exportDwg(name, view, dicdlg["printfilepath"])
         alerttext = "DWG-Files: \n {} exported \n to: {}".format(namelist, dicdlg["printfilepath"])
-        forms.alert(alerttext, ok=True)
+        MessageBox.Show("{}".format(alerttext))  if dicdlg["messageboxes"] else None
     except: 
         import traceback
-        print traceback.format_exc()
+        print (traceback.format_exc())
         
 
 
@@ -772,24 +804,37 @@ viewlist = [doc.GetElement(i) for i in selec_ids if not doc.GetElement(i) \
 # if viewlist: print len(viewlist)
 
 
-if __shiftclick__:
-    sheetlist, dicprj, dicdlg = selectsheets2print() 
-
-
-# open dictionaries or reading dlg values, and filenamelist. 
+# 
 try:
-    with open(os.path.dirname(__file__) + "\\dlgval.pkl", "rb+" ) as fa:
-        #fa.seek(0) 
-        dicdlg = pickle.load(fa)
+    if __shiftclick__:
+        sheetlist, dicprj, dicdlg = selectsheets2print() 
+except:
+    pass
+# open dictionaries or reading dlg values, and filenamelist. 
 
-    with open(os.path.dirname(os.path.dirname(__file__)) + "\\ExportDlgValues" + 
-                      "\\" + uidoc.Document.Title + "_dlgval.pkl", "rb+") as f: # create and read
-        dicprj = pickle.load(f)
+# Load Dialog Values fomr .json-file, it its not there create file
+try:
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+
+    with open(prj_dlg_file, "a+") as f: # create and read
+        f.seek(0) #set cursor to 0 position
+        dicprj = json.load(f) 
+
+    with open(dlgval_file, "a+") as g:   # create and read 
+        g.seek(0)
+        dicdlg = json.load(g) 
+
+    # print(dicdlg)
+    # print(dicprj)
 except: 
     # if no files can be found ( first time run) oben selection dialog. 
     sheetlist, dicprj, dicdlg = selectsheets2print() 
+    # import traceback
+    # traceback.print_exc()
+    #print dialogfile + "-file created!" 
 
-#print dicdlg
+
 
 
 #----------------------------------------------------------------------------------------
