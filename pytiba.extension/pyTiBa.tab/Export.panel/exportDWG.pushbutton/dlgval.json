@@ -1,0 +1,8 @@
+{
+    "messageboxes": false, 
+    "printfilepath": "C:\\Users\\tb_y530\\desktop", 
+    "output": false, 
+    "pdfexport": false, 
+    "printername": "PDFCreator", 
+    "dwgexport": true
+}
