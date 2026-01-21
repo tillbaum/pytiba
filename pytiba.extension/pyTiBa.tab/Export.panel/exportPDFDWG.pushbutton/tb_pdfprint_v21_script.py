@@ -84,9 +84,6 @@ dlgval_file = str(BASE_DIR / "dlgval.json")  # Dialog_Values_File
 
 
 
-
-
-
 def pick_folder(): 
     fb_dlg = Forms.FolderBrowserDialog()             
     if fb_dlg.ShowDialog() == Forms.DialogResult.OK: 
@@ -96,14 +93,20 @@ def pick_folder():
 #func lookuppara; paraname as string: ex: "Sheet Number"
 #TODO: maybe replace with orderedParameters, or ParameterSet, 
 def lookupparaval(element, paraname): 
-    try: newp = element.LookupParameter(paraname)
-    except: newp = None; pass 
+    try: 
+        newp = element.LookupParameter(paraname)
+    except: 
+        import traceback
+        traceback.print_exc()
+        newp = None
+        pass 
     if newp:
         if newp.StorageType.Equals(StorageType.String):    value = newp.AsString()
         elif newp.StorageType == StorageType.Integer: value = newp.AsInteger()
         elif newp.StorageType == StorageType.Double:  value = newp.AsDouble()
         return value
-    else: return False
+    else: 
+        return "Error lookupparaval"
 
 def namefromparalist(view, paralist):
     import datetime
@@ -115,7 +118,7 @@ def namefromparalist(view, paralist):
         if i in ['_', ' ', '.', '-', ';','']:
             tmp_filenamelist.append(i)
         elif i in ["date", "time", "Date", "Time"]:
-            datetime = m.strftime(eval(i.lower()))
+            datetime = m.strftime(eval(i))
             tmp_filenamelist.append(datetime)
         #elif i in ["%d","%m","%y","%Y","%H","%M"]:
         elif i.startswith("%"):
@@ -125,7 +128,8 @@ def namefromparalist(view, paralist):
             except: pass
         elif lookupparaval(view, i):
             lookupval = lookupparaval(view, i)
-            tmp_filenamelist.append(str(lookupval) if lookupval else '')
+            # print(lookupval)
+            tmp_filenamelist.append(str(lookupval) if lookupval else 'Error')
         # else:
             # tmp_filenamelist.append(i)
     filename = ''.join(tmp_filenamelist)
@@ -232,9 +236,9 @@ class SelectFromCheckBoxes(framework.Windows.Window):
             self.chbox_dwgexport.IsChecked = self.dicdlg["dwgexport"]
             self.chbox_messageboxes.IsChecked = self.dicdlg["messageboxes"]
         except:
+            # default to Standard Dialog Values  ------------------------    
             # print "Exception" 
             # traceback.print_exc()
-            # default to Standard Dialog Values  ------------------------    
             self.txtbox_paranames.Text = "Sheet Number,-,Sheet Name,_,date,_,time"
             #self.expander.Header += "Sheet Number,_,Sheet Name"
             self.chbox_output.IsChecked = True   
@@ -385,12 +389,16 @@ class SelectFromCheckBoxes(framework.Windows.Window):
     def preview_click(self, sender, event):
         ''' Handle Preview Button click '''
         str2list = self.txtbox_paranames.Text.split(',')
+        # print(str2list)
         #stripwhitespacefrlistelem = list(map(str.strip, str2list)) 
         sheetobj = [x.item for x in self._context if x.state]
         try:
             sheetobj =  sheetobj[0] if sheetobj else FilteredElementCollector(doc).OfClass(ViewSheet).FirstElement()
-        except: pass           
+            # print(sheetobj)
+        except: pass    
+
         paranamesval = namefromparalist(sheetobj, str2list) if sheetobj else "No Sheet selected"
+        # print(paranamesval)
         self.lb_txtbox_preview.Text = paranamesval
 
 
@@ -597,6 +605,7 @@ def createTmpPrintSetting():
         printpara.ReplaceHalftoneWithThinLines = False
         printsetup.Save
         return printsetup
+    
 
     if not temp_printsetting:
         #print "Creating PrintSetting..."
@@ -658,17 +667,18 @@ def printview(singlesheet, filepathname , papersizeobj, pdfprinterName,
         (doc.Delete(i.Id) for i in FECviewSets if i.Name =="!tmpViewSheetSet")
         viewSheetSetting.SaveAs("!tmpViewSheetSet")
         printmanager.SubmitPrint()
-        t.RollBack() # chose to use RollBack()- Way, see ForumEntry 
-        #??? Error, needed!!. 
+        t.RollBack() # chose to use RollBack()-Way, see ForumEntry 
+        
         time.sleep(1) # 1 sec, necessary, because PDF Printer will cause error 
                       # if too many docs submitted too fast. see Revit API ForumEntry
-        # viewSheetSetting.Delete() # replaced with t.RollBack() 
-        errorReport = "Sucess"
+        # viewSheetSetting.Delete() # replaced with t.RollBack() --> RollBack()-Way
+        errorReport = "Success"
     except:             
         import traceback
         errorReport = traceback.format_exc()
-        print(errorReport)
-        try: t.RollBack() 
+        # print(errorReport)
+        try: 
+            t.RollBack() 
         except: pass 
     return errorReport
 
@@ -725,10 +735,10 @@ def pdfexportsheet(dicprj, dicdlg, sheetlist):
 
     if dicdlg["output"]:
         print (" SelectSheets-DialogValues -------------------------")
-        for i in dicdlg.items(): print i
+        for i in dicdlg.items(): print(i)
 
         print("\n ViewList ----------------------------------")
-        for i in sheetlist: print i.SheetNumber + " - " + i.Name
+        for i in sheetlist: print (i.SheetNumber + " - " + i.Name)
 
         print("\n FileNameList-------------------------------")
         for i in fnlist[1] : print(i)
@@ -812,7 +822,7 @@ except:
     pass
 # open dictionaries or reading dlg values, and filenamelist. 
 
-# Load Dialog Values fomr .json-file, it its not there create file
+    # Load Dialog Values fomr .json-file, it its not there create file
 try:
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -824,17 +834,15 @@ try:
     with open(dlgval_file, "a+") as g:   # create and read 
         g.seek(0)
         dicdlg = json.load(g) 
-
-    # print(dicdlg)
-    # print(dicprj)
 except: 
-    # if no files can be found ( first time run) oben selection dialog. 
+     # if no files can be found ( first time run) oben selection dialog. 
     sheetlist, dicprj, dicdlg = selectsheets2print() 
     # import traceback
     # traceback.print_exc()
-    #print dialogfile + "-file created!" 
+    
 
-
+# print(dicdlg)
+# print(dicprj)
 
 
 #----------------------------------------------------------------------------------------
@@ -862,11 +870,7 @@ if dicdlg["dwgexport"] and viewlist:
     dwgexportview( viewlist)
 
 
-
 endtime = timer.get_time()
 if dicdlg["output"]:   
-    print(endtime)
-
-
-
+    print("script ended, time: ",endtime)
 
