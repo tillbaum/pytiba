@@ -41,7 +41,7 @@ By selecting a connected line sequence, one can create a developed view of walls
 + Arrange Viewports on SheetView, (Select Viewports on Sheet you want to arrange, run tool).
 This tool arranges the Viewports in order. Running the tool again reverses the order.  
 
-__Video:__ Bridge_Sections: https://youtu.be/n2K7Ex94knA, Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
+__Video:__ Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 
 ### Schedule csv-Export
 Exports selected Schedules to csv-files and import them in one Excel Workbook file.  
