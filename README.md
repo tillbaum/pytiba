@@ -47,7 +47,7 @@ __Video:__ Developed View of Walls: https://youtu.be/dLOM2APDQpQ)
 Exports selected Schedules to csv-files and import them in one Excel Workbook file.  
 __Video:__ (https://youtu.be/6-b6gVSqS5E)
 
-### DublicateSheets
+### DublicateSheets (deprecated)
 Dublicates a selected sheet (ProjectBrowser). Including multiple TitleBlocks and Legend Views.  
 Select a Sheet in the ProjectBrowser and hit the Sheet-Dublicate-Button.  
 __Video:__ (https://www.youtube.com/watch?v=sUjJq2U34tg)
