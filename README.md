@@ -1,4 +1,4 @@
-# pytiba (This Repository is not maintained any longer)
+# pytiba (This Repository is not activly maintained)
 pytiba is an extension for [pyRevit](http://eirannejad.github.io/pyRevit/)
 
 [![GitHub license](https://img.shields.io/badge/License-GPL3-brightgreen.svg)](https://github.com/tillbaum/pytiba/blob/master/LICENSE)
